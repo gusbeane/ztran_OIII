@@ -1,0 +1,156 @@
+% mnras_template.tex
+%
+% LaTeX template for creating an MNRAS paper
+%
+% v3.0 released 14 May 2015
+% (version numbers match those of mnras.cls)
+%
+% Copyright (C) Royal Astronomical Society 2015
+% Authors:
+% Keith T. Smith (Royal Astronomical Society)
+
+% Change log
+%
+% v3.0 May 2015
+%    Renamed to match the new package name
+%    Version number matches mnras.cls
+%    A few minor tweaks to wording
+% v1.0 September 2013
+%    Beta testing only - never publicly released
+%    First version: a simple (ish) template for creating an MNRAS paper
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Basic setup. Most papers should leave these options alone.
+\documentclass[a4paper,fleqn,usenatbib]{mnras}
+
+% MNRAS is set in Times font. If you don't have this installed (most LaTeX
+% installations will be fine) or prefer the old Computer Modern fonts, comment
+% out the following line
+\usepackage{newtxtext,newtxmath}
+% Depending on your LaTeX fonts installation, you might get better results with one of these:
+%\usepackage{mathptmx}
+%\usepackage{txfonts}
+
+% Use vector fonts, so it zooms properly in on-screen viewing software
+% Don't change these lines unless you know what you are doing
+\usepackage[T1]{fontenc}
+\usepackage{ae,aecompl}
+
+
+%%%%% AUTHORS - PLACE YOUR OWN PACKAGES HERE %%%%%
+
+% Only include extra packages if you really need them. Common packages are:
+\usepackage{graphicx}	% Including figure files
+\usepackage{amsmath}	% Advanced maths commands
+\usepackage{amssymb}	% Extra maths symbols
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%% AUTHORS - PLACE YOUR OWN COMMANDS HERE %%%%%
+
+\newcommand{\avg}[1]{\ensuremath{\langle #1 \rangle}}
+\newcommand{\CII}{\ensuremath{\text{C~\textsc{ii}}}}
+\newcommand{\OIII}{\ensuremath{\text{O~\textsc{iii}}}}
+
+% Please keep new commands to a minimum, and use \newcommand not \def to avoid
+% overwriting existing commands. Example:
+%\newcommand{\pcm}{\,cm$^{-2}$}	% per cm-squared
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%% TITLE PAGE %%%%%%%%%%%%%%%%%%%
+
+% Title of the paper, and the short title which is used in the headers.
+% Keep the title short and informative.
+\title[The Transition Redshift]{The transition redshift as a probe of reionization}
+
+% The list of authors, and the short list which is used in the headers.
+% If you need two or more lines of authors, add an extra line using \newauthor
+\author[A. Beane and K. Moriwaki]{
+Angus Beane$^{1}$\thanks{E-mail: angus.beane@cfa.harvard.edu}
+and Kana Moriwaki$^{2}$\thanks{E-mail: kana.moriwaki@utap.phy.s.u-tokyo.ac.jp}
+\\
+% List of institutions
+$^{1}$Center for Astrophysics {\normalfont |} Harvard \& Smithsonian, 60 Garden Street, Cambridge, MA 02138, USA\\
+$^{2}$Department of Physics, The University of Tokyo, 7-3-1 Hongo, Bunkyo, Tokyo 113-0033, Japan
+% $^{2}$Center for Computational Astrophysics, Flatiron Institute, 162 5th Avenue, New York, NY 10010, USA\\
+% $^{3}$Department of Physics \& Astronomy, University of Pennsylvania, 209 South 33rd Street, Philadelphia, PA 19104, USA
+}
+
+% These dates will be filled out by the publisher
+\date{Accepted XXX. Received YYY; in original form ZZZ}
+
+% Enter the current year, for the copyright statements etc.
+\pubyear{2019}
+
+% Don't change these lines
+\begin{document}
+\label{firstpage}
+\pagerange{\pageref{firstpage}--\pageref{lastpage}}
+\maketitle
+
+% Abstract of the paper
+\begin{abstract}
+The early stages of the Epoch of Reionization (EoR), probed by the 21~cm line,
+are sensitive to the detailed formation of the first galaxies. An important
+transition occurs on large scales at $\avg{x_i}\sim0.15$, when the 21~cm field
+transitions from being positively correlated with the galaxy field to being
+negatively correlated. The redshift at which this transition occurs (the
+``transition redshift'') is, in principle, sensitive to both the structure of
+the 21~cm field but also the galaxy field. However, by considering a fixed
+model for the EoR and varying the parameters of a simple model for the galaxy
+field in a mock [O~\textsc{iii}]-emitter sample cross-correlation, we show
+that the transition redshift is in fact insensitive to the structure of the
+selected galaxy sample. We show that prospects for measuring the transition
+redshift are feasible in the near-term with a combination of LOFAR and JWST.
+Being derived from a cross-correlation, the transition redshift is less
+impacted by foreground contamination currently inhibiting 21~cm auto-spectrum
+measurements. Therefore, the transition redshift is a promising probe of the
+early stages of the EoR.
+\end{abstract}
+
+% Select between one and six entries from the list of approved keywords.
+% Don't make up new ones.
+\begin{keywords}
+cosmology: theory -- dark ages, reionization, first stars -- large-scale
+structure of Universe
+\end{keywords}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%% BODY OF PAPER %%%%%%%%%%%%%%%%%%
+
+\section{Introduction}
+The introduction.
+
+
+\section{Conclusions}
+
+The conclusions.
+
+\section*{Acknowledgements}
+
+The Acknowledgements section.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%% REFERENCES %%%%%%%%%%%%%%%%%%
+
+% The best way to enter references is to use BibTeX:
+
+%\bibliographystyle{mnras}
+%\bibliography{example} % if your bibtex file is called example.bib
+
+\appendix
+
+\section{Some extra material}
+
+The appendix.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% Don't change these lines
+\bsp	% typesetting comment
+\label{lastpage}
+\end{document}

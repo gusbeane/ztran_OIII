@@ -1,0 +1,6 @@
+paper/*.pdf
+paper/*.aux
+paper/*.log
+paper/*.bbl
+paper/ms.bib
+
