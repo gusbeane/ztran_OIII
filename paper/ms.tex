@@ -48,6 +48,8 @@
 
 %%%%% AUTHORS - PLACE YOUR OWN COMMANDS HERE %%%%%
 
+\newcommand{\tfast}{\texttt{21cmFAST}}
+
 \newcommand{\avg}[1]{\ensuremath{\langle #1 \rangle}}
 \newcommand{\CII}{\ensuremath{\text{C~\textsc{ii}}}}
 \newcommand{\OIII}{\ensuremath{\text{O~\textsc{iii}}}}
@@ -131,6 +133,15 @@ the EoR, issues of foreground contamination and instrumental artifacts have so
 far prevented the success of such efforts. Only upper limits have been placed
 on the amplitude of the 21~cm fluctuations \citep[e.g.][]{2013MNRAS.433..639P,
 2014PhRvD..89b3002D, 2016ApJ...833..102B, 2017ApJ...838...65P}.
+
+\section{Methods}
+\subsection{21cmFAST}
+We generate realizations of the 21~cm field for our different EoR models using
+the publicly available code \tfast{}
+v1.3\footnote{\url{https://github.com/andreimesinger/21cmFAST},
+commit: \texttt{42e7566}}. Spin temperature fluctuations are computed and the
+excursion set approach is used to identify the ionized regions
+\citep{2011MNRAS.411..955M}.
 
 \section{To cite}
 Papers that need to be cited:
