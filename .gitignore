@@ -4,3 +4,4 @@ paper/*.log
 paper/*.bbl
 paper/ms.bib
 
+__pycache__/
