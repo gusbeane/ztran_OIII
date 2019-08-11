@@ -138,7 +138,7 @@ structure of Universe
 
 %%%%%%%%%%%%%%%%% BODY OF PAPER %%%%%%%%%%%%%%%%%%
 
-\section{Introduction}
+\section{Introduction} \label{sec:intro}
 The redshifted 21~cm line contains a great deal of information about the
 structure and evolution of the Epoch of Reionization (EoR). Once measured at
 $z\sim6\textup{--}12$, it should reveal the nature of the formation of the
@@ -150,8 +150,70 @@ far prevented the success of such efforts. Only upper limits have been placed
 on the amplitude of the 21~cm fluctuations \citep[e.g.][]{2013MNRAS.433..639P,
 2014PhRvD..89b3002D, 2016ApJ...833..102B, 2017ApJ...838...65P}.
 
-\section{Methods}
-\subsection{21cmFAST}
+Because of the great difficulties confronting 21~cm auto-spectrum
+measurements, the prospect of measuring 21~cm in cross-correlation with
+another tracer of large-scale structure, such as galaxies. The galaxy field
+will only correlate with the cosmological 21~cm signal, and the foregrounds
+will not contribute to the mean signal (though they will make the measurement
+noisy, and so some foreground subtraction is still necessary).
+
+The 21~cm-galaxy cross-correlation was first explored by
+\citet{2007MNRAS.375.1034W} in the context of using Ly$\alpha$-emitters to
+distinguish between ``inside-out'' and ``outside-in'' reionization scenarios.
+However, this technique is limited to the late stages of reionization since
+Ly$\alpha$-emitters are obscured by neutral hydrogen even slightly earlier
+into the EoR \citep[e.g.][]{2006ApJ...648....7K}. \citet{2007ApJ...660.1030F}
+expanded upon this by considering a general galaxy survey. It was later shown
+that the scale at which the cross-correlation goes from negative to zero (the
+``turnover scale'') provides a tracer of the bubble size. However, the precise
+turnover scale also depends on the properties of the selected galaxy sample,
+with turnover happening on larger scales if only more massive galaxies can be
+detected \citep{2009ApJ...690..252L}. A number of authors have studied this
+cross-correlation in the context of detectability of the anti-correlation on
+large scales \citep{2013MNRAS.432.2615W, 2016MNRAS.457..666V,
+2017ApJ...836..176H}, and its dependence on the details of the EoR
+\citep{2014MNRAS.438.2474P}.
+
+In addition to the cross-correlation between 21~cm and galaxies, the
+cross-correlation between 21~cm and intensity maps has been investigated in an
+analogous fashion. Line intensity mapping experiments aim to measure the
+large-scale structure of emission in a certain line, and is easier to perform
+over a large area at high redshift than a galaxy survey. Current targets
+include [\CII], CO, Ly$\alpha$, and H$\alpha$ \citep[for a recent review,
+see][]{2017arXiv170909066K}. Another intriguing possible line is [\OIII]
+$88\,\mu \text{m}$ \citep[e.g.][]{2018MNRAS.481L..84M}, in which a lensed
+$z=9.1$ galaxy has recently shown to be exceptionally bright
+\citep{2018Natur.557..392H}.
+
+This cross-correlation was first studied with the CO rotational lines
+\citep{2011ApJ...741...70L}, and then the [\CII] \citep{2012ApJ...745...49G}
+and Ly$\alpha$ lines \citep{2013ApJ...763..132S}. The possibility of using the
+cross-bispectrum the 21~cm and [\CII] fields has been explored
+\citep{2018ApJ...867...26B}, along with combining the three cross-spectra with
+a 21~cm, [\CII], and [\OIII] overlap \citep{2019ApJ...874..133B}. While in
+this work we will only consider the cross-correlation between 21~cm and
+galaxies, all of what we consider is applicable to the transition redshift as
+computed by cross-correlating 21~cm with any of these emission lines.
+
+In the case of either galaxies or emission lines, it is expected that the two
+are positively correlated at the very beginning of the EoR (though the
+emission lines may be very weak due to the lack of significant metal
+enhancement). This is because the densest regions host the most mass and
+therefore 21~cm emission and galaxy populations. However, the densest regions
+will also ionize first {\bf cite something}, and after some time 21~cm and
+galaxies will become negatively correlated. We refer to the redshift at which
+this transition occurs at a fixed $k$ as the ``transition redshift''
+$z_\star(k)$, assuming that only one such zero exists. In other words, the
+cross-correlation at $k$ vanishes at $z=z_{\star}(k)$.
+
+In this work we investigate to what extent the transition redshift is
+dependent upon the galaxy sample used to define it. We assume a galaxy catalog
+selected using an [\OIII] emitter survey. In particular, we are interested in
+how $z_\star$ changes as we vary the parameters of the [\OIII] luminosity-mass
+relation for a fixed halo catalog.
+
+\section{Methods} \label{sec:methods}
+\subsection{21cmFAST} \label{ssec:tfast}
 We generate realizations of the 21~cm field for our different EoR models using
 the publicly available code \tfast{}
 v1.3\footnote{\url{https://github.com/andreimesinger/21cmFAST},
