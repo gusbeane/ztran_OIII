@@ -29,7 +29,7 @@ color_list = [tb_c[1], tb_c[-1], tb_c[3]]
 fig, ax = plt.subplots(1, 1, figsize=(columnwidth, columnwidth))
 
 for name, directory, c in zip(name_list, dir_list, color_list):
-    zlist, klist, xps = read_xps(directory)
+    zlist, klist, xps = read_xps(directory+'/xps*')
     klist, ztran = find_ztran(zlist, klist, xps)
 
     ax.plot(klist, ztran, label=name, c=c)
