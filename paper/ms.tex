@@ -252,6 +252,24 @@ feel about the last sentence}
 
 
 
+\subsection{[\OIII] luminosity} \label{ssec:oiii_lum}
+
+
+In order to model the relation between [\OIII] luminosity ($L_{\OIII}$) and
+halo mass, we follow \citet{2019ApJ...874..133B}. Specifically, we assume that
+the luminosity for halo $j$
+\beq \label{eq:lum_mass_relation}
+L_j(M) = L_0 \left[ \frac{M}{M_0} \right]^{\alpha} + s_j(w)
+\eeq
+where $L_0/M_0^{\alpha}$ is set to match the total average intensity of
+[\OIII] at that redshift, $\alpha$ is the power-law index, and $s_j(w)$ is a
+number randomly selected from a lognormal distribution with zero mean and
+width $w$. Once the average intensity is fixed (which we assume so), this is a
+two-parameter model ($\alpha$ and $w$) of the [\OIII] luminosity-mass
+relation.
+
+\section{Detectability}
+
 
 \section{To cite}
 Papers that need to be cited:
@@ -266,7 +284,7 @@ The HI Bias during the Epoch of Reionization, discusses the positive/negative
 correlation transition as a function of $k$
 \url{https://arxiv.org/abs/1907.05098}
 
-\section{Conclusions}
+\section{Conclusions} \label{sec:conclusions}
 
 The conclusions.
 
