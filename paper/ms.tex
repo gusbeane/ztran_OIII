@@ -216,10 +216,42 @@ relation for a fixed halo catalog.
 \subsection{21cmFAST} \label{ssec:tfast}
 We generate realizations of the 21~cm field for our different EoR models using
 the publicly available code \tfast{}
-v1.3\footnote{\url{https://github.com/andreimesinger/21cmFAST},
-commit: \texttt{42e7566}}. Spin temperature fluctuations are computed and the
+v1.3\footnote{\url{https://github.com/andreimesinger/21cmFAST}, commit:
+\texttt{42e7566}}. Spin temperature fluctuations are computed and the
 excursion set approach is used to identify the ionized regions
-\citep{2011MNRAS.411..955M}.
+\citep{2011MNRAS.411..955M}. Rather than using the mean collapsed fraction, we
+use the halo field to compute the ionization and 21~cm fields, since we are
+interested in the evolution at early redshifts where the Poisson statistics of
+the halo field can be important.
+
+The parameters used in our \tfast{} runs are as folows. The minimum halo mass
+contributing to the ionizing budget is $10^{8}\,\Msun$. The \HII{} efficiency
+factor ($\zeta$) is set to $10$. The maximum smoothing scale for the
+ionization field $R_{\text{max}}$ (loosely referred to as the ``mean-free
+path'') is set to $30\,\Mpc$, though this quantity has almost no effect on the
+early stage of the EoR. We set the fraction of baryons converted to stars
+($f_\star$) to be $0.1$. We ignore redshift-space distortions for convenience.
+All other parameters are set to their default values, except for the heating
+parameter discussed in the next paragraph. The exact parameter files are given
+in the github repository associated with this work (see the Supplementary
+Material).
+
+Our three different models for the EoR differ in the efficiency of their
+heating, controlled by the number of X-ray photons per solar mass in galaxies
+($\zeta_X$). Our fiducial model (\fid{}) is the default value
+$\zeta_X=2\times10^{56}$, while our ``hot'' and ``cold'' models (\hot{} and
+\cold{}) set $\zeta_X=10^{57}$ and $5\times10^{55}$, respectively. The average
+$\delta T_b$ signal is shown in \textbf{some figure}, which shows
+\textbf{something}. Note that none of these models account for the recent
+claimed detection by the EDGES group of an extremely deep absorption trough at
+$z\sim17$ \citep{2018Natur.555...67B}. If confirmed, though, that detection
+would indicate an extremely low gas temperature at $z\sim17$, which would
+favor larger amplitudes of the spin temperature fluctuations at $z\sim10$,
+unless heating were extremely efficient after $z\sim17$. {\bf don't know how I
+feel about the last sentence}
+
+
+
 
 \section{To cite}
 Papers that need to be cited:
