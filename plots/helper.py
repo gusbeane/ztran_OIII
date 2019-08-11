@@ -31,10 +31,9 @@ def find_ztran(zlist, klist, xps):
         
         xps_fn_z = interp1d(zlist, this_xps)
         try:
-            sol = ridder(xps_fn_z, 9, 16)
+            sol = ridder(xps_fn_z, 9, 12.3)
         except:
             sol = np.nan
-        print(sol)
         this_ztran = float(sol)
         ztran.append(this_ztran)
 
