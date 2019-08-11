@@ -5,3 +5,5 @@ paper/*.bbl
 paper/ms.bib
 
 __pycache__/
+programs/
+
