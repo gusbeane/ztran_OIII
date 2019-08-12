@@ -38,7 +38,7 @@ for name, directory, c in zip(name_list, dir_list, color_list):
         zlist, klist, xps = read_xps(directory+'/Halos_xps/*'+Mcut_label+'.txt')
         klist, ztran = find_ztran(zlist, klist, xps)
         ztran_list.append(ztran[5])
-        print(ztran[5])
+        print(klist[5], ztran[5])
 
     ax.plot(Mcut_list, ztran_list, label=name, c=c)
 
