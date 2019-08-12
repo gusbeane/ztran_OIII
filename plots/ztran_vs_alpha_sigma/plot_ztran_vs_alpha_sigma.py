@@ -42,12 +42,13 @@ for name, directory, c in zip(name_list, dir_list, color_list):
     
     ztran_list = []
     for alpha_label in alpha_label_list:
-        print(directory+'/IM_xps/*'+alpha_label+'_'+sigma_fid_label)
+        # print(directory+'/IM_xps/*'+alpha_label+'_'+sigma_fid_label)
         zlist, klist, xps = read_xps(directory+'/IM_xps/*'+alpha_label+'_'+sigma_fid_label)
         klist, ztran = find_ztran(zlist, klist, xps)
         ztran_list.append(ztran[5])
-        print(klist[5], ztran[5])
+        # print(klist[5], ztran[5])
 
+    print(name, 'alpha variation:', 100.0*(np.max(ztran_list) - np.min(ztran_list))/np.mean(ztran_list))
     ax[0].plot(alpha_list, ztran_list, label=name, c=c)
 
     ztran_list = []
@@ -55,8 +56,9 @@ for name, directory, c in zip(name_list, dir_list, color_list):
         zlist, klist, xps = read_xps(directory+'/IM_xps/*'+alpha_fid_label+'_'+sigma_label)
         klist, ztran = find_ztran(zlist, klist, xps)
         ztran_list.append(ztran[5])
-        print(klist[5], ztran[5])
+        # print(klist[5], ztran[5])
 
+    print(name, 'sigma variation:', 100.0*(np.max(ztran_list) - np.min(ztran_list))/np.mean(ztran_list))
     ax[1].plot(sigma_list, ztran_list, c=c)
 
 
