@@ -366,7 +366,18 @@ structure of the 21~cm field, and is thus an excellent probe of reionization.}
 \end{figure*}
 
 \section{Detectability}
+Up to this point, we have not been specific about which galactic emission line
+one might consider using to measure \zst{}. This is because computing \zst{}
+from our simulations with our simple line intensity model
+(\S~\ref{ssec:oiii_int_map}) does not require specifying the total average
+intensity of the field.
 
+The variance of the cross-spectrum between the 21~cm field and a line $i$ is given by \citep[e.g.][]{2007ApJ...660.1030F}
+\beq \label{eq:var_xps}
+\text{Var}\left[P_{21,i}\right] = P_{21,i}^2 + P_{21,\text{tot}} P_{i,\text{tot}}\text{,}
+\eeq
+where $P_{21,\text{tot}} = P_{21,21} + N_{21}$, where $N_{21}$ is the total
+noise contribution, and is similarly defined for $P_{i,\text{tot}}$.
 
 \section{To cite}
 Papers that need to be cited:
