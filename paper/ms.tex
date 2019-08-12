@@ -266,21 +266,21 @@ feel about the last sentence}
 
 
 
-\subsection{[\OIII] luminosity} \label{ssec:oiii_lum}
-
-
+\subsection{[\OIII] intensity mapping} \label{ssec:oiii_int_map}
 In order to model the relation between [\OIII] luminosity ($L_{\OIII}$) and
 halo mass, we follow \citet{2019ApJ...874..133B}. Specifically, we assume that
-the luminosity for halo $j$
+the mean luminosity of a halo of mass $M$ is,
 \beq \label{eq:lum_mass_relation}
-L_j(M) = L_0 \left[ \frac{M}{M_0} \right]^{\alpha} + s_j(w)
+\avg{L}(M) = L_0 \left[ \frac{M}{M_0} \right]^{\alpha}\text{,}
 \eeq
 where $L_0/M_0^{\alpha}$ is set to match the total average intensity of
-[\OIII] at that redshift, $\alpha$ is the power-law index, and $s_j(w)$ is a
-number randomly selected from a lognormal distribution with zero mean and
-width $w$. Once the average intensity is fixed (which we assume so), this is a
-two-parameter model ($\alpha$ and $w$) of the [\OIII] luminosity-mass
-relation.
+[\OIII] at that redshift and $\alpha$ is the power-law index. We then draw the
+luminosity of each halo from a lognormal distribution of mean $\avg{L}(M)$ and
+scatter $\sigma$. Once the average intensity is fixed (which we assume so),
+this is a two-parameter model ($\alpha$ and $\sigma$) of the [\OIII]
+luminosity-mass relation. In practice, the average intensity of the field only
+enters in the detectability calculation, so we instead work in the convenient
+units where $L_0=1$ and $M_0=10^{10}\,\Msun$.
 
 \section{Results} \label{sec:results}
 \subsection{The halo field}
