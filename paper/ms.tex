@@ -264,10 +264,14 @@ favor larger amplitudes of the spin temperature fluctuations at $z\sim10$,
 unless heating were extremely efficient after $z\sim17$. {\bf don't know how I
 feel about the last sentence}
 
+We generate the halo field using the included halo finder in \tfast{}. This
+halo finder is a remnant of an earlier version of the code
+\citep{2007ApJ...669..663M} and is typically unused in standard
+configurations. It is based upon the ``peak-patch'' algorithm for halo finding
+introduced by \citet{1996ApJS..103....1B}.
 
-
-\subsection{[\OIII] intensity mapping} \label{ssec:oiii_int_map}
-In order to model the relation between [\OIII] luminosity ($L_{\OIII}$) and
+\subsection{Intensity mapping} \label{ssec:oiii_int_map}
+In order to model the relation between luminosity ($L$) and
 halo mass, we follow \citet{2019ApJ...874..133B}. Specifically, we assume that
 the mean luminosity of a halo of mass $M$ is,
 \beq \label{eq:lum_mass_relation}
