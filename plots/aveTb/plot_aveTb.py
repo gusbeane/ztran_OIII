@@ -28,7 +28,7 @@ dir_list = [hot_dir, fid_dir, cold_dir]
 name_list = [r'\texttt{hot}', r'\texttt{fid}', r'\texttt{cold}']
 color_list = [tb_c[1], tb_c[-1], tb_c[3]]
 
-fig, ax = plt.subplots(1, 1, figsize=(columnwidth, columnwidth))
+fig, ax = plt.subplots(1, 1, figsize=(textwidth, columnwidth))
 
 for directory, name, c in zip(dir_list, name_list, color_list):
     dTfiles = glob.glob(directory+'/delta_T*')
@@ -44,8 +44,8 @@ for directory, name, c in zip(dir_list, name_list, color_list):
 
     ax.plot(zlist, aveTb_list, label=name, c=c)
 
-ax.set_xlim(8, 14)
-ax.set_ylim(-50, 50)
+ax.set_xlim(8, 25)
+ax.set_ylim(-200, 100)
 
 ax.set_xlabel(r'$z$')
 ax.set_ylabel(r'$\delta T_b\,[\,\text{mK}\,]$')
