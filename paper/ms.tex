@@ -65,9 +65,13 @@
 \newcommand{\Gyr}{\ensuremath{\text{Gyr}}}
 \newcommand{\kms}{\ensuremath{\text{km}\,\text{s}^{-1}}}
 
+\newcommand{\hoverMpc}{\ensuremath{h\,\text{Mpc}^{-1}}}
+
 \newcommand{\fid}{\texttt{fid}}
 \newcommand{\hot}{\texttt{hot}}
 \newcommand{\cold}{\texttt{cold}}
+
+\newcommand{\zst}{\ensuremath{z_{\star}}}
 
 % Please keep new commands to a minimum, and use \newcommand not \def to avoid
 % overwriting existing commands. Example:
@@ -213,6 +217,15 @@ how $z_\star$ changes as we vary the parameters of the [\OIII] luminosity-mass
 relation for a fixed halo catalog.
 
 \section{Methods} \label{sec:methods}
+\subsection{The transition redshift} \label{ssec:ztran_def}
+The transition redshift $\zst(k)$ is defined by a field $x$ which traces the
+density field on large scales and the condition that
+\beq \label{eq:ztran_def}
+P_{21,x}(k, \zst(k)) \equiv 0\text{.}
+\eeq
+If more than one such \zst{} exists, then we choose the lowest one where
+$P_{21,x}$ last transitioned from positive to negative.
+
 \subsection{21cmFAST} \label{ssec:tfast}
 We generate realizations of the 21~cm field for our different EoR models using
 the publicly available code \tfast{}
