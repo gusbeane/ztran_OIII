@@ -26,15 +26,16 @@ dir_list = [hot_dir, fid_dir, cold_dir]
 name_list = [r'\texttt{hot}', r'\texttt{fid}', r'\texttt{cold}']
 color_list = [tb_c[1], tb_c[-1], tb_c[3]]
 
-Mcut_list = [1E9, 1E10, 1E11]
-Mcut_list_label =['Mcut1e9','Mcut1e10','Mcut1e11']
-ls_list = ['solid', 'dashed', 'dotted']
+#Mcut_list = [1E9, 1E10, 1E11]
+Mcut_list = [1E9]
+Mcut_list_label =['Mcut5.012e+09']
+ls_list = ['solid']
 
-fig, ax = plt.subplots(1, 1, figsize=(textwidth, columnwidth))
+fig, ax = plt.subplots(1, 1, figsize=(columnwidth, columnwidth))
 
 for name, directory, c in zip(name_list, dir_list, color_list):
     for i,(label, ls) in enumerate(zip(Mcut_list_label, ls_list)):
-        zlist, klist, xps = read_xps(directory+'/halo_xps/*'+label+'*.txt')
+        zlist, klist, xps = read_xps(directory+'/Halos_xps/*'+label+'*.txt')
         klist, ztran = find_ztran(zlist, klist, xps)
         if i==0:
             ax.plot(zlist, xps[:,3], label=name, c=c, ls=ls)
@@ -44,14 +45,14 @@ for name, directory, c in zip(name_list, dir_list, color_list):
 # ax.set_xscale('log')
 ax.set_yscale('symlog')
 
-ax.set_xlim(9, 14)
+ax.set_xlim(9, 13)
 ax.set_ylim(-1e6, 1e6)
 
 ax.set_xlabel(r'$z$')
-ax.set_ylabel(r'$\Delta_{21,g}^2\,[\,\text{mK}^2\,]$')
+ax.set_ylabel(r'$\Delta_{21,g}^2\,[\,\text{mK}\,]$')
 
-ax.xaxis.set_major_formatter(FormatStrFormatter('%.1f'))
-ax.xaxis.set_minor_formatter(FormatStrFormatter('%.1f'))
+# ax.xaxis.set_major_formatter(FormatStrFormatter('%.1f'))
+# ax.xaxis.set_minor_formatter(FormatStrFormatter('%.1f'))
 
 ax.legend(title='model', frameon=False)
 fig.tight_layout()
