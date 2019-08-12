@@ -278,16 +278,31 @@ the mean luminosity of a halo of mass $M$ is,
 \avg{L}(M) = L_0 \left[ \frac{M}{M_0} \right]^{\alpha}\text{,}
 \eeq
 where $L_0/M_0^{\alpha}$ is set to match the total average intensity of
-[\OIII] at that redshift and $\alpha$ is the power-law index. We then draw the
+the line at that redshift and $\alpha$ is the power-law index. We then draw the
 luminosity of each halo from a lognormal distribution of mean $\avg{L}(M)$ and
 scatter $\sigma$. Once the average intensity is fixed (which we assume so),
-this is a two-parameter model ($\alpha$ and $\sigma$) of the [\OIII]
+this is a two-parameter model ($\alpha$ and $\sigma$) of the
 luminosity-mass relation. In practice, the average intensity of the field only
 enters in the detectability calculation, so we instead work in the convenient
 units where $L_0=1$ and $M_0=10^{10}\,\Msun$.
 
+We assign a luminosity to each halo according to this prescription. An
+important consideration is that we have not specified which line we are
+working with. In detail, the relationship between a halo and it's luminosity
+is a complicated function of the state of the interstellar medium of the
+hosted galaxy, which can depend upon a number of both deterministic and
+stochastic quantities. Our model crudely attempts to account for this by
+including some random scatter, but will ultimately be a rough description of
+reality.
+
+{\bf Some words justifying why our simple model will extend to more
+complicated luminosity-halo relations.}
+
 \section{Results} \label{sec:results}
 \subsection{The halo field}
+{\bf If we switch to LIM I think this section should be scrapped, except
+showing ztran vs k but using LIM and density instead of halos}
+
 We first investigate the dependence of the transition redshift as defined by
 the halo field. Fig.~\ref{fig:ztran_vs_k} shows the transition redshift
 defined by the 21~cm\,--\,density cross-power spectrum (see
