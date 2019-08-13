@@ -413,6 +413,38 @@ $z\sim10$ should be less uncertain than for lines that require metal
 enrichment such as [\CII], [\OIII], or [\NII], since the total metal
 enrichment of the universe is quickly declining at these high $z$ 
 
+We assume a linear relationship between H-$\alpha$ luminosity and star
+formation rate \citep{1998ARA&A..36..189K}:
+\beq \label{eq:LHalpha_SFR}
+\begin{split}
+L_{\Ha} &= 3.29\times10^{7} \left(\frac{\SFR}{1\,\Msun\,\yr^{-1}}\right) L_{\odot} \\
+        &\equiv L_{0,\Ha} \left(\frac{\SFR}{1\,\Msun\,\yr^{-1}}\right)
+\end{split}
+\eeq
+This relation is based on a Salpeter IMF and is calibrated towards local
+galaxies. As discussed in \citet{2019MNRAS.487.5902K}, the reality of
+$z\sim10$ galaxies may be slightly different\,--\,the IMF may be more top
+heavy, and the metal-poor nature of a typical star will naturally produce more
+ionizing photons. However, the escape of ionizing photons may be more
+efficient at higher redshift, and the conventional relation assumes no escape.
+\citet{2019MNRAS.487.5902K} provide a slightly shallower fitting form for the
+$L_{\Ha}-\SFR$ relation based upon their simulations, but we choose to use the
+conventional relation here.
+
+We use a fitting formula for the SFRd calibrated upon galaxies from $z=0$ to
+$8$ \citep{2014ARA&A..52..415M}
+\beq \label{eq:sfrd}
+\psi(z) = 0.015 \frac{(1+z)^{2.7}}{1+\left[(1+z)/2.9\right]^{5.6}}\,M_{\odot}\yr^{-1}\Mpc^{-3} \text{.}
+\eeq
+The comoving emissitivity of the \Ha{} line can then be readily computed as,
+\beq \label{eq:Ha_emiss}
+\epsilon_{\Ha}(z) = L_{0,\Ha} \psi(z)\text{.}
+\eeq
+The average specific intensity can be computed from the comoving emissitivity
+as \citep{2011ApJ...741...70L,2013ApJ...768...15P},
+\beq \label{eq:int_from_em}
+\avg{I_{\Ha}}(z) = \frac{\epsilon_{\Ha}(z)}{4\pi\nu_{\text{rest},\Ha}} \frac{c}{H(z)}
+\eeq
 
 The variance of the cross-spectrum between the 21~cm field and a line $i$ is given by \citep[e.g.][]{2007ApJ...660.1030F}
 \beq \label{eq:var_xps}
