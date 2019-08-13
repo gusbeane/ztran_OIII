@@ -7,3 +7,4 @@ paper/ms.bib
 __pycache__/
 programs/
 
+*.npy
