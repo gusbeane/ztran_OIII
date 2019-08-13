@@ -446,12 +446,20 @@ as \citep{2011ApJ...741...70L,2013ApJ...768...15P},
 \avg{I_{\Ha}}(z) = \frac{\epsilon_{\Ha}(z)}{4\pi\nu_{\text{rest},\Ha}} \frac{c}{H(z)}
 \eeq
 
-The variance of the cross-spectrum between the 21~cm field and a line $i$ is given by \citep[e.g.][]{2007ApJ...660.1030F}
+The variance of the cross-spectrum between the 21~cm field and a line $i$ is
+given by \citep[e.g.][]{2007ApJ...660.1030F}
 \beq \label{eq:var_xps}
-\text{Var}\left[P_{21,i}\right] = P_{21,i}^2 + P_{21,\text{tot}} P_{i,\text{tot}}\text{,}
+\Var{P_{21,i}} = P_{21,i}^2 + 
+                                  P_{21,\text{tot}} P_{i,\text{tot}}\text{,}
 \eeq
 where $P_{21,\text{tot}} = P_{21,21} + N_{21}$, where $N_{21}$ is the total
-noise contribution, and is similarly defined for $P_{i,\text{tot}}$.
+noise contribution. $P_{i,\text{tot}}$ is defined similarly.
+
+By expanding $P_{21,i}$ as a linear function about \zst{}, we can estimate the
+error on \zst{} by
+\beq \label{eq:error_on_zst}
+\Var{\zst} = \left(\left.\frac{\partial P_{21,i}}{\partial z}\right|_{\zst}\right)^{-2} \Var{P_{21,i}}
+\eeq
 
 \section{To cite}
 Papers that need to be cited:
