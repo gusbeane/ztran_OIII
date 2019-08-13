@@ -393,10 +393,26 @@ structure of the 21~cm field, and is thus an excellent probe of reionization.}
 
 \section{Detectability}
 Up to this point, we have not been specific about which galactic emission line
-one might consider using to measure \zst{}. This is because computing \zst{}
-from our simulations with our simple line intensity model
-(\S~\ref{ssec:oiii_int_map}) does not require specifying the total average
-intensity of the field.
+one might consider using to measure \zst{}\,--\,in fact, our entire formalism
+could be executed using a galaxy survey, if one with sufficient redshift
+accuracy and depth could be executed. While it will not be possible for a
+traditional galaxy survey to extend to $z\sim10$ in the near future, it may be
+possible to execute a survey of line-emitting galaxies, e.g., with
+[\OIII]-emitters \citep{2018MNRAS.481L..84M, 2019arXiv190610863M}.
+
+In this work we will consider the prospect of performing intensity mapping
+measurements of the H$\alpha$ line using the proposed, space-based Cosmic Dawn
+Intensity Mapper (CDIM) \citep{2019arXiv190303144C}. CDIM is an infrared
+telescope with an $83\,\text{cm}$ dish capable of measuring $R=300$ spectra
+from wavelengths $0.75\,\mu\text{m}$ to $7.5\,\mu\text{m}$. Therefore, CDIM
+will be able to measure the H-$\alpha$ line ($656\,\text{nm}$) from $z=0.14$
+to $10.4$ and the H-$\beta$ line ($486\,\text{nm}$) from $z=0.54$ to $14.4$,
+so long as there is a detectable signal. We choose to study the H-$\alpha$ and
+H-$\beta$ lines since the uncertainty regarding their total intensity at
+$z\sim10$ should be less uncertain than for lines that require metal
+enrichment such as [\CII], [\OIII], or [\NII], since the total metal
+enrichment of the universe is quickly declining at these high $z$ 
+
 
 The variance of the cross-spectrum between the 21~cm field and a line $i$ is given by \citep[e.g.][]{2007ApJ...660.1030F}
 \beq \label{eq:var_xps}
