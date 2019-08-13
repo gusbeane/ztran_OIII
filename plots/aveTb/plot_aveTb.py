@@ -21,37 +21,61 @@ tb_c = ['#4e79a7', '#f28e2b', '#e15759', '#76b7b2', '#59a14f',
         '#edc948', '#b07aa1', '#ff9da7', '#9c755f', '#bab0ac']
 
 base_dir = '/Users/abeane/scratch/ztran_OIII_sims/v1.2/256Mpch/256'
-fid_dir = base_dir + '/fid' + '/Boxes'
-cold_dir = base_dir + '/cold' + '/Boxes'
-hot_dir = base_dir + '/hot' + '/Boxes'
+fid_dir = base_dir + '/fid'
+cold_dir = base_dir + '/cold'
+hot_dir = base_dir + '/hot'
 dir_list = [hot_dir, fid_dir, cold_dir]
 name_list = [r'\texttt{hot}', r'\texttt{fid}', r'\texttt{cold}']
+fname_list = ['hot', 'fid', 'cold']
 color_list = [tb_c[1], tb_c[-1], tb_c[3]]
 
-fig, ax = plt.subplots(1, 1, figsize=(textwidth, columnwidth))
+fig, ax = plt.subplots(2, 1, figsize=(textwidth, 1.2*columnwidth), sharex=True)
 
-for directory, name, c in zip(dir_list, name_list, color_list):
-    dTfiles = glob.glob(directory+'/delta_T*')
-    zlist = np.array([float(re.findall('z\d\d\d\.\d\d', f)[0][1:]) for f in dTfiles])
+for directory, name, fname, c in zip(dir_list, name_list, fname_list, color_list):
+    try:
+        zlist = np.load('zlist_'+fname+'.npy')
+        nflist = np.load('nflist_'+fname+'.npy')
+        aveTb_list = np.load('Tblist_'+fname+'.npy')
+        ztran = np.load('ztran_'+fname+'.npy')
+    except:
+        dTfiles = glob.glob(directory+'/Boxes/delta_T*')
+        zlist = np.array([float(re.findall('z\d\d\d\.\d\d', f)[0][1:]) for f in dTfiles])
+        nflist = np.array([float(re.findall('nf\d.\d\d\d\d\d\d', f)[0][2:]) for f in dTfiles])
 
-    aveTb_list = []
-    for k in np.argsort(zlist):
-        Tb = np.fromfile(dTfiles[k], dtype='f4')
-        aveTb_list.append(np.mean(Tb))
-    aveTb_list = np.array(aveTb_list)
+        aveTb_list = []
+        for k in np.argsort(zlist):
+            Tb = np.fromfile(dTfiles[k], dtype='f4')
+            aveTb_list.append(np.mean(Tb))
+        aveTb_list = np.array(aveTb_list)
+    
+        this_zlist, klist, xps = read_xps(directory+'/MyOutput/xps*')
+        klist, ztran = find_ztran(this_zlist, klist, xps)
+        # ztran = ztran[5]
+    
+        keys = np.argsort(zlist)
+        nflist = nflist[keys]
+        zlist = np.sort(zlist)
 
-    zlist = np.sort(zlist)
+        np.save('zlist_'+fname+'.npy', zlist)
+        np.save('nflist_'+fname+'.npy', nflist)
+        np.save('Tblist_'+fname+'.npy', aveTb_list)
+        np.save('ztran_'+fname+'.npy', ztran)
 
-    ax.plot(zlist, aveTb_list, label=name, c=c)
+    ax[0].plot(zlist, 1.-nflist, c=c, label=name)
+    ax[1].plot(zlist, aveTb_list, label=name, c=c)
+    ax[1].axvline(ztran[5], c=c, ls='dashed')
 
-ax.set_xlim(8, 25)
-ax.set_ylim(-200, 100)
+ax[0].set_yscale('log')
+ax[0].set_ylim(0.0001, 1)
+ax[1].set_xlim(26, 6)
+ax[1].set_ylim(-200, 50)
 
-ax.set_xlabel(r'$z$')
-ax.set_ylabel(r'$\delta T_b\,[\,\text{mK}\,]$')
+ax[0].set_ylabel(r'$\left<x_{\text{H~\textsc{ii}}}\right>$')
+ax[1].set_xlabel(r'$z$')
+ax[1].set_ylabel(r'$\delta T_b\,[\,\text{mK}\,]$')
 
-ax.legend(title='model', frameon=False)
+ax[0].legend(title='model', frameon=False)
 fig.tight_layout()
 
-fig.savefig('aveTb.pdf')
+fig.savefig('aveTb_nf.pdf')
 
