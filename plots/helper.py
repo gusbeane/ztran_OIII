@@ -14,23 +14,34 @@ cosmo = cosmology.setCosmology('myCosmo', params)
 
 h = 0.6766
 
-def read_xps(files):
+def read_xps(files, return_auto=False):
     xps_list = glob.glob(files)
     zlist = np.array([float(re.findall('\d\d\d\.\d\d', f)[0]) for f in xps_list])
     
     output = []
+    output_auto1 = []
+    output_auto2 = []
     for i,key in enumerate(np.argsort(zlist)):
         fname = xps_list[key]
         data = np.genfromtxt(fname)
         xps = data[:,3]
+        auto1 = data[:,1]
+        auto2 = data[:,2]
         output.append(xps)
+        output_auto1.append(auto1)
+        output_auto2.append(auto2)
         if i ==0:
             klist = data[:,0]/h
     
     zlist = np.sort(zlist)
 
     output = np.array(output)
-    return zlist, klist, output
+    output_auto1 = np.array(output_auto1)
+    output_auto2 = np.array(output_auto2)
+    if return_auto:
+        return zlist, klist, output, output_auto1, output_auto2
+    else:
+        return zlist, klist, output
 
 def find_ztran(zlist, klist, xps):
     ztran = []
