@@ -158,3 +158,22 @@ def Nmodes(k, deltak, z, deltaz, Asurv=31.1):
 
     return 4.*np.pi*k**2 * deltak / Vfund
 
+def _calc_snr_(zst, P21, Pdelta, P21delta_deriv, N21, Nmodes, b, I, sigma=4E4, wave_emit=0.65628):
+    wave_obs = (1.+zst)*wave_emit
+    Vpix = calc_vpix(wave_obs)
+    NHa = sigma**2 * Vpix
+
+    Pi = b**2 * I**2 * Pdelta
+    xps = np.sqrt(Pi*P21)
+
+    P21tot = P21 + N21
+    Pitot = Pi + NHa
+
+
+    varP21i = xps**2 + P21tot*Pitot
+
+    P21i_deriv = b * I * P21delta_deriv
+
+    varz = varP21i / (P21i_deriv**2)
+    return np.sqrt(varz/Nmodes)
+
