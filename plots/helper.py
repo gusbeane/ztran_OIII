@@ -125,5 +125,5 @@ def Halpha_intensity(z):
     nurest_Ha = c/(656.28 * u.nm)
 
     ans = (L0*psi_at_z / (4.*np.pi*nurest_Ha)) * (c/Hz)
-    return ans
+    return ans.to_value(u.Jy)
 
