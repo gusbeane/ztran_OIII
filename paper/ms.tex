@@ -487,19 +487,20 @@ given by,
 \beq \label{eq:fund}
 V_{\text{fund}} = \frac{(2 \pi)^3}{L_{\perp}^2 L_{\parallel}}\text{,}
 \eeq
-where $L_{\perp}$ is the  and $L_{\parallel}$ is the comoving
-length of the redshift extent of the bin. The optimal redshift binning is not
-entirely clear, since the observational target is not the power spectrum. We
-assume a redshift bin of $\Delta z = 0.03$, which is smaller than the expected
-error we compute on \zst{}, and so is not an unreasonable choice. 
+where $L_{\perp}$ is the  and $L_{\parallel}$ is the comoving length of the
+redshift extent of the bin. The optimal redshift binning is not entirely
+clear, since the observational target is not the power spectrum. We assume a
+redshift bin of $\Delta z = 0.03$, which is smaller than the expected error we
+compute on \zst{}, and so is not an unreasonable choice. We assume a $k$-bin
+of fairly large width, from $k=0.1$ to $0.4\,\Mpc^{-1}$.
 
-We assume a $k$-bin of fairly large width, from $k=0.1$ to $0.3\,\Mpc^{-1}$.
-
-By expanding $P_{21,i}$ as a linear function about \zst{}, we can estimate the
+By expanding $P_{21,\Ha}$ as a linear function about \zst{}, we can estimate the
 error on \zst{} by
 \beq \label{eq:error_on_zst}
-\Var{\zst} = \left(\left.\frac{\partial P_{21,i}}{\partial z}\right|_{\zst}\right)^{-2} \Var{P_{21,i}}
+\Var{\zst} = \left(\left.\frac{\partial P_{21,\Ha}}{\partial z}\right|_{\zst}\right)^{-2} \Var{P_{21,\Ha}}\text{,}
 \eeq
+where ${\partial P_{21,\Ha}}/{\partial z}$ is computed numerically.
+
 
 \section{Conclusions} \label{sec:conclusions}
 
