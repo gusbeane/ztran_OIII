@@ -460,9 +460,19 @@ $i$ is given by \citep[e.g.][]{2007ApJ...660.1030F}
 where $P_{21,\text{tot}} = P_{21,21} + N_{21}$, where $N_{21}$ is the total
 noise contribution. $P_{i,\text{tot}}$ is defined similarly.
 
-In detail $N_{\Ha}$ will have a frequency-dependent structure, but for
-$z\sim9$ to $10$, it is reasonable to assume a conservative, constant value of
-$N_{\Ha}\sim4\times10^4\,\text{Jy}/\text{sr}$ for the medium survey. For
+In detail the surface brightness sensitivity will have a frequency-dependent
+structure, but for $z\sim9$ to $10$, it is reasonable to assume a
+conservative, constant value of
+$\sigma_{\Ha}\sim4\times10^4\,\text{Jy}/\text{sr}$ for the medium survey. To
+convert the surface brightness sensitivity to a power spectrum noise, we simply
+write,
+\beq \label{eq:ps_}
+N_{\Ha} = \sigma_{\Ha}^2 V_{\text{voxel}}\text{,}
+\eeq 
+where $V_{\text{voxel}}$ is the comoving volume of one voxel. To compute this
+we use the fact that CDIM will have $1''$ pixels and a resolution of $R=300$.
+
+For
 $N_{21}$, we assume that $N_{21} = P_{21,21}(k=0.1\,\text{Mpc}^{-1})$, a
 reasonable approximation given that HERA-350 will image some large scale modes
 \citep{2017PASP..129d5001D}, as discussed previously \citep{2018ApJ...867...26B}.
