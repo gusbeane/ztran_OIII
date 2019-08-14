@@ -6,6 +6,7 @@ from scipy.optimize import ridder
 
 import astropy.units as u
 from astropy.constants import c
+from scipy.interpolate import interp2d
 
 from colossus.cosmology import cosmology
 
@@ -176,4 +177,31 @@ def _calc_snr_(zst, P21, Pdelta, P21delta_deriv, N21, Nmodes, b, I, sigma=4E4, w
 
     varz = varP21i / (P21i_deriv**2)
     return np.sqrt(varz/Nmodes)
+
+def snr_wrapper(zst, zlist, klist, xps, pdelta, p21, kmin, kmax, deltaz, b=4):
+    keval = (kmin+kmax)/2.0
+    deltak = kmax - kmin
+
+    fn = interp2d(zlist, klist, np.transpose(xps))
+    fn_pdelta = interp2d(zlist, klist, np.transpose(pdelta))
+    fn_p21 = interp2d(zlist, klist, np.transpose(p21))
+
+    I = Halpha_intensity(zst)
+
+    # i know im numerically differentiating an interpolation
+    # i know im a bad person, pls do not write me angry emails about it
+    # or do it might be kind of entertaining
+    Pup = fn(zst+0.01, keval)
+    Pdown = fn(zst-0.01, keval)
+    Pderiv = (Pup-Pdown)/0.02
+
+    P21 = fn_p21(zst, keval)
+    Pdelta = fn_pdelta(zst, keval)
+    N21 = fn_p21(zst, 0.1)
+
+    Nm = Nmodes(keval, deltak, zst, deltaz)
+    print(Nm)
+
+    sigmazst = _calc_snr_(zst, P21, Pdelta, Pderiv, N21, Nm, b, I)
+    return float(sigmazst)
 
