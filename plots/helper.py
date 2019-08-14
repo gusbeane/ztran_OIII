@@ -205,3 +205,15 @@ def snr_wrapper(zst, zlist, klist, xps, pdelta, p21, kmin, kmax, deltaz, b=4):
     sigmazst = _calc_snr_(zst, P21, Pdelta, Pderiv, N21, Nm, b, I)
     return float(sigmazst)
 
+def add_snr_in_quadrature(zst, zlist, klist, xps, pdelta, p21, kmin, kmax, Nk, deltaz, b=4):
+    kbins = np.linspace(kmin, kmax, Nk)
+    sigmaz_tot = 0
+    for i in range(len(kbins)-1):
+        this_kmin = kbins[i]
+        this_kmax = kbins[i+1]
+        this_sigmaz = snr_wrapper(zst, zlist, klist, xps, pdelta, p21, this_kmin, this_kmax, deltaz, b=4)
+        sigmaz_tot += this_sigmaz**(-2) # add them in inverse quadrature
+    sigmaz_tot = sigmaz_tot**(-0.5)
+    return sigmaz_tot
+
+
