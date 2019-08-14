@@ -217,3 +217,8 @@ def add_snr_in_quadrature(zst, zlist, klist, xps, pdelta, p21, kmin, kmax, Nk, d
     return sigmaz_tot
 
 
+if __name__ == '__main__':
+    directory = '/Users/abeane/scratch/ztran_OIII_sims/v1.2/256Mpch/256/fid/MyOutput'
+    zlist, klist, xps, pdelta, p21 = read_xps(directory+'/xps*', return_auto=True)
+
+    sigmazst = add_snr_in_quadrature(10, zlist, klist, xps, pdelta, p21, 0.1, 1.0, 10, 0.1)
