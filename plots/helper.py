@@ -113,7 +113,7 @@ def compute_power_spectrum(field, Lbox, npix, kmin=None, kmax=None, deltak=1.4):
 
     return klist, Pklist
 
-def Halpha_intensity(z):
+def Halpha_intensity(z, Hbeta=False):
     def psi(zp):
         ans = 0.015
         ans *= (1+zp)**(2.7)
@@ -126,7 +126,11 @@ def Halpha_intensity(z):
     nurest_Ha = c/(656.28 * u.nm)
 
     ans = (L0*psi_at_z / (4.*np.pi*nurest_Ha)) * (c/Hz)
-    return ans.to_value(u.Jy)
+    ans = ans.to_value(u.Jy)
+    if Hbeta:
+        return ans * 0.35
+    else:
+        return ans
 
 def calc_vpix(wave_obs, pix_length_in_arcsecond=1, R=300, wave_emit=0.65628):
     dlambda = wave_obs/R
