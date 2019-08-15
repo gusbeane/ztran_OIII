@@ -32,7 +32,7 @@ def read_xps(files, return_auto=False):
         output_auto1.append(auto1)
         output_auto2.append(auto2)
         if i ==0:
-            klist = data[:,0]/h
+            klist = data[:,0]
     
     zlist = np.sort(zlist)
 
@@ -136,8 +136,8 @@ def calc_vpix(wave_obs, pix_length_in_arcsecond=1, R=300, wave_emit=0.65628):
     z_upper = (wave_upper-wave_emit)/wave_emit
     z_lower = (wave_lower-wave_emit)/wave_emit
 
-    d_upper = cosmo.comovingDistance(z_max=z_upper)
-    d_lower = cosmo.comovingDistance(z_max=z_lower)
+    d_upper = cosmo.comovingDistance(z_max=z_upper)/cosmo.h
+    d_lower = cosmo.comovingDistance(z_max=z_lower)/cosmo.h
     volume = (4.*np.pi/3.) * (d_upper**3 - d_lower**3)
 
     Apix = (pix_length_in_arcsecond * u.arcsecond)**2
@@ -149,11 +149,11 @@ def calc_vpix(wave_obs, pix_length_in_arcsecond=1, R=300, wave_emit=0.65628):
 def Nmodes(k, deltak, z, deltaz, Asurv=31.1):
     z_upper = z + deltaz/2.0
     z_lower = z - deltaz/2.0
-    dlos = cosmo.comovingDistance(z_lower, z_upper)
+    dlos = cosmo.comovingDistance(z_lower, z_upper)/cosmo.h
 
     # convert A surv to on sky width
     Lindeg = np.sqrt(Asurv)
-    Lperp = cosmo.angularDiameterDistance(z) * Lindeg * (np.pi/180.)
+    Lperp = cosmo.angularDiameterDistance(z)/cosmo.h * Lindeg * (np.pi/180.)
 
     Vfund = (2.*np.pi)**3 / (Lperp**2 * dlos)
 
