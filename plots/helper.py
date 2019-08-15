@@ -150,6 +150,7 @@ def Nmodes(k, deltak, z, deltaz, Asurv=31.1):
     z_upper = z + deltaz/2.0
     z_lower = z - deltaz/2.0
     dlos = cosmo.comovingDistance(z_lower, z_upper)/cosmo.h
+    print(z, deltaz, z_lower, z_upper, dlos)
 
     # convert A surv to on sky width
     Lindeg = np.sqrt(Asurv)
@@ -159,7 +160,7 @@ def Nmodes(k, deltak, z, deltaz, Asurv=31.1):
 
     return 4.*np.pi*k**2 * deltak / Vfund
 
-def _calc_snr_(zst, P21, Pdelta, P21delta_deriv, N21, Nmodes, b, I, sigma=4E4, wave_emit=0.65628):
+def _calc_snr_(zst, P21, Pdelta, P21delta_deriv, N21, Nmodes, b, I, sigma=4E4, wave_emit=0.65628, returnvar21=False):
     wave_obs = (1.+zst)*wave_emit
     Vpix = calc_vpix(wave_obs)
     NHa = sigma**2 * Vpix
@@ -176,9 +177,12 @@ def _calc_snr_(zst, P21, Pdelta, P21delta_deriv, N21, Nmodes, b, I, sigma=4E4, w
     P21i_deriv = b * I * P21delta_deriv
 
     varz = varP21i / (P21i_deriv**2)
-    return np.sqrt(varz/Nmodes)
+    if returnvar21:
+        return np.sqrt(varP21i/Nmodes)
+    else:
+        return np.sqrt(varz/Nmodes)
 
-def snr_wrapper(zst, zlist, klist, xps, pdelta, p21, kmin, kmax, deltaz, b=4):
+def snr_wrapper(zst, zlist, klist, xps, pdelta, p21, kmin, kmax, deltaz, b=4, returnvar21=False):
     keval = (kmin+kmax)/2.0
     deltak = kmax - kmin
 
@@ -202,8 +206,11 @@ def snr_wrapper(zst, zlist, klist, xps, pdelta, p21, kmin, kmax, deltaz, b=4):
     Nm = Nmodes(keval, deltak, zst, deltaz)
     print(Nm)
 
-    sigmazst = _calc_snr_(zst, P21, Pdelta, Pderiv, N21, Nm, b, I)
-    return float(sigmazst)
+    sigmazst = _calc_snr_(zst, P21, Pdelta, Pderiv, N21, Nm, b, I, returnvar21=returnvar21)
+    if returnvar21:
+        return float(sigmazst), P21
+    else:
+        return float(sigmazst), zst
 
 def add_snr_in_quadrature(zst, zlist, klist, xps, pdelta, p21, kmin, kmax, Nk, deltaz, b=4):
     kbins = np.linspace(kmin, kmax, Nk)
@@ -211,7 +218,7 @@ def add_snr_in_quadrature(zst, zlist, klist, xps, pdelta, p21, kmin, kmax, Nk, d
     for i in range(len(kbins)-1):
         this_kmin = kbins[i]
         this_kmax = kbins[i+1]
-        this_sigmaz = snr_wrapper(zst, zlist, klist, xps, pdelta, p21, this_kmin, this_kmax, deltaz, b=4)
+        this_sigmaz, zst = snr_wrapper(zst, zlist, klist, xps, pdelta, p21, this_kmin, this_kmax, deltaz, b=4)
         sigmaz_tot += this_sigmaz**(-2) # add them in inverse quadrature
     sigmaz_tot = sigmaz_tot**(-0.5)
     return sigmaz_tot
@@ -222,3 +229,4 @@ if __name__ == '__main__':
     zlist, klist, xps, pdelta, p21 = read_xps(directory+'/xps*', return_auto=True)
 
     sigmazst = add_snr_in_quadrature(10, zlist, klist, xps, pdelta, p21, 0.1, 1.0, 10, 0.1)
+    sigmap21, P21 = snr_wrapper(10, zlist, klist, xps, pdelta, p21, 0.1, 0.2, 0.1, returnvar21=True)
