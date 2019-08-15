@@ -208,11 +208,10 @@ def snr_wrapper(zst, zlist, klist, xps, pdelta, p21, kmin, kmax, deltaz, b=4, re
     N21 = fn_p21(zst, 0.1)
 
     Nm = Nmodes(keval, deltak, zst, deltaz)
-    print(Nm)
 
     sigmazst = _calc_snr_(zst, P21, Pdelta, Pderiv, N21, Nm, b, I, returnvar21=returnvar21)
     if returnvar21:
-        return float(sigmazst), P21
+        return float(sigmazst), xps
     else:
         return float(sigmazst), zst
 
@@ -233,4 +232,6 @@ if __name__ == '__main__':
     zlist, klist, xps, pdelta, p21 = read_xps(directory+'/xps*', return_auto=True)
 
     sigmazst = add_snr_in_quadrature(10, zlist, klist, xps, pdelta, p21, 0.1, 1.0, 10, 0.1)
-    sigmap21, P21 = snr_wrapper(10, zlist, klist, xps, pdelta, p21, 0.1, 0.2, 0.1, returnvar21=True)
+    sigmap21, this_xps, P21, Pi, Pdelta = snr_wrapper(10, zlist, klist, xps, pdelta, p21, 0.1, 0.2, 0.1, returnvar21=True)
+
+    # sigmap21, P21 = snr_wrapper(10, zlist, klist, xps, pdelta, p21, 0.1, 0.2, 0.1, sigma=)
