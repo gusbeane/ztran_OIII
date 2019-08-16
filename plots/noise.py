@@ -38,3 +38,8 @@ def Halpha_intensity(z, Hbeta=False):
     ans = ans.to_value(u.Jy)
     return ans
 
+def compute_Nx(wave_obs, sigma=4E4, wave_emit=0.65628):
+    vpix = calc_vpix(wave_obs, wave_emit=wave_emit)
+    ans = sigma**2 * vpix
+    return ans
+
