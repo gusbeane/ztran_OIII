@@ -113,3 +113,6 @@ def varp21x_wrapper(z, deltaz, kmin, kmax, zlist, klist, xps, pdelta, p21, b=4, 
     return float(xps), float(np.sqrt(varxps/Nm))
 
 
+if __name__ == '__main__':
+    directory = '/Users/abeane/scratch/ztran_OIII_sims/v1.2/256Mpch/256/fid/MyOutput'
+    zlist, klist, xps, pdelta, p21 = read_xps(directory+'/xps*', return_auto=True)
