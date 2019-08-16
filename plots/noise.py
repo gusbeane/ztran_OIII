@@ -57,3 +57,23 @@ def Nmodes(k, deltak, z, deltaz, Asurv=31.1):
 
     return 4.*np.pi*k**2 * deltak / Vfund
 
+def calc_vpix(wave_obs, pix_length_in_arcsecond=1, R=300, wave_emit=0.65628):
+    # compute the upper and lower redshift from the spectrograph resolution
+    dlambda = wave_obs/R
+    wave_upper = wave_obs + dlambda/2.0
+    wave_lower = wave_obs - dlambda/2.0
+
+    z_upper = (wave_upper-wave_emit)/wave_emit
+    z_lower = (wave_lower-wave_emit)/wave_emit
+
+    d_upper = cosmo.comovingDistance(z_max=z_upper)/cosmo.h
+    d_lower = cosmo.comovingDistance(z_max=z_lower)/cosmo.h
+    volume = (4.*np.pi/3.) * (d_upper**3 - d_lower**3)
+
+    Apix = (pix_length_in_arcsecond * u.arcsecond)**2
+    Apix = Apix.to_value(u.deg**2)
+    tot_sky_in_degree = (4.*np.pi * u.steradian).to_value(u.deg**2)
+    Apix_fraction = Apix / tot_sky_in_degree
+
+    return Apix_fraction * volume
+
