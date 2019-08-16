@@ -90,3 +90,26 @@ def varp21x(P21, N21, Px, Nx):
     Pxtot = Px + Nx
     return xps**2 + P21tot*Pxtot
 
+def varp21x_wrapper(z, deltaz, kmin, kmax, zlist, klist, xps, pdelta, p21, b=4, sigma=4E4, wave_emit_x=0.65628):
+    fn_xps, fn_pdelta, fn_p21 = construct_interpolators(zlist, klist, xps, pdelta, p21)
+
+    kcen = (kmin+kmax)/2.0
+    deltak = kmax-kmin
+
+    P21 = fn_p21(z, kcen)
+
+    Ix = Halpha_intensity(z)
+    Px = (b*Ix)**2 * fn_pdelta(z, kcen)
+
+    wave_obs_x = wave_emit_x*(1.+z)
+
+    N21 = fn_p21(z, 0.1)
+    Nx = compute_Nx(wave_obs_x, sigma=sigma)
+
+    varxps = varp21x(P21, N21, Px, Nx)
+    Nm = Nmodes(kcen, deltak, z, deltaz)
+    xps = np.sqrt(P21*Px)
+
+    return float(xps), float(np.sqrt(varxps/Nm))
+
+
