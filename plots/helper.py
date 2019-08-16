@@ -114,6 +114,13 @@ def compute_power_spectrum(field, Lbox, npix, kmin=None, kmax=None, deltak=1.4):
     return klist, Pklist
 
 def Halpha_intensity(z, Hbeta=False):
+    if Hbeta:
+        wave = 486.13615 * u.nm
+        L0 = 0.35 * 3.29E7 * u.Lsun / (u.Msun/u.year)
+    else:
+        wave = 656.45377 * u.nm
+        L0 = 3.29E7 * u.Lsun / (u.Msun/u.year)
+
     def psi(zp):
         ans = 0.015
         ans *= (1+zp)**(2.7)
@@ -121,16 +128,12 @@ def Halpha_intensity(z, Hbeta=False):
         return ans
 
     psi_at_z = psi(z) * u.Msun/u.year/(u.Mpc**3)
-    L0 = 3.29E7 * u.Lsun / (u.Msun/u.year)
     Hz = cosmo.Hz(z) * u.km/u.s/u.Mpc
-    nurest_Ha = c/(656.28 * u.nm)
+    nurest = c/wave
 
-    ans = (L0*psi_at_z / (4.*np.pi*nurest_Ha)) * (c/Hz)
+    ans = (L0*psi_at_z / (4.*np.pi*nurest)) * (c/Hz)
     ans = ans.to_value(u.Jy)
-    if Hbeta:
-        return ans * 0.35
-    else:
-        return ans
+    return ans
 
 def calc_vpix(wave_obs, pix_length_in_arcsecond=1, R=300, wave_emit=0.65628):
     dlambda = wave_obs/R
@@ -232,6 +235,6 @@ if __name__ == '__main__':
     zlist, klist, xps, pdelta, p21 = read_xps(directory+'/xps*', return_auto=True)
 
     sigmazst = add_snr_in_quadrature(10, zlist, klist, xps, pdelta, p21, 0.1, 1.0, 10, 0.1)
-    sigmap21, this_xps, P21, Pi, Pdelta = snr_wrapper(10, zlist, klist, xps, pdelta, p21, 0.1, 0.2, 0.1, returnvar21=True)
+    sigmap21, this_xps = snr_wrapper(10, zlist, klist, xps, pdelta, p21, 0.1, 0.2, 0.1, returnvar21=True)
 
     # sigmap21, P21 = snr_wrapper(10, zlist, klist, xps, pdelta, p21, 0.1, 0.2, 0.1, sigma=)
