@@ -84,3 +84,9 @@ def construct_interpolators(zlist, klist, xps, pdelta, p21):
 
     return fn_xps, fn_pdelta, fn_p21
 
+def varp21x(P21, N21, Px, Nx):
+    xps = np.sqrt(P21*Px)
+    P21tot = P21 + N21
+    Pxtot = Px + Nx
+    return xps**2 + P21tot*Pxtot
+
