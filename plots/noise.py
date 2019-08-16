@@ -77,3 +77,10 @@ def calc_vpix(wave_obs, pix_length_in_arcsecond=1, R=300, wave_emit=0.65628):
 
     return Apix_fraction * volume
 
+def construct_interpolators(zlist, klist, xps, pdelta, p21):
+    fn_xps = interp2d(zlist, klist, np.transpose(xps))
+    fn_pdelta = interp2d(zlist, klist, np.transpose(pdelta))
+    fn_p21 = interp2d(zlist, klist, np.transpose(p21))
+
+    return fn_xps, fn_pdelta, fn_p21
+
