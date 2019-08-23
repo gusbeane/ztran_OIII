@@ -79,3 +79,17 @@ def calc_vpix(wave_obs, wave_emit, pix_length_in_arcsecond=1, R=300):
 
     return Apix_fraction * volume
 
+def calc_Nmodes(kmin, kmax, z, deltaz, Asurv=31.1):
+    z_upper = z + deltaz/2.0
+    z_lower = z - deltaz/2.0
+    dlos = cosmo.comovingDistance(z_lower, z_upper)/cosmo.h
+
+    # convert A surv to on sky width
+    Lindeg = np.sqrt(Asurv)
+    Lperp = cosmo.angularDiameterDistance(z)/cosmo.h * Lindeg * (np.pi/180.)
+
+    Vfund = (2.*np.pi)**3 / (Lperp**2 * dlos)
+    Vkspace = (4*np.pi/3.) * (kmax**3 - kmin**3)
+
+    return Vkspace / Vfund
+
