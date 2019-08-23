@@ -127,7 +127,7 @@ def varp21x_wrapper(line, z, deltaz, kmin, kmax, zlist, klist, xps, pdelta, p21,
 
     P21 = fn_p21(z, kcen)
 
-    Ix = line_intensity(line, z)
+    Ix = line_intensity(z, line)
     Px = (b*Ix)**2 * fn_pdelta(z, kcen)
 
     wave_obs_x = wave_emit_x*(1.+z)
