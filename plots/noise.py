@@ -131,6 +131,7 @@ def varp21x_wrapper(line, z, deltaz, kmin, kmax, zlist, klist, xps, pdelta, p21,
     Px = (b*Ix)**2 * fn_pdelta(z, kcen)
 
     wave_obs_x = wave_emit_x*(1.+z)
+    print('observed wavelength: ', wave_obs_x)
 
     N21 = fn_p21(z, 0.1)
     Nx = compute_Nx(wave_obs_x, sigma=sigma)
