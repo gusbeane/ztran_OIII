@@ -17,6 +17,8 @@ cosmo = cosmology.setCosmology('myCosmo', params)
 h = 0.6766
 
 def line_intensity(z, line):
+    assert isinstance(line, str), "line must be a string!"
+
     if line == 'Halpha':
         wave = 656.45377 * u.nm
         L0 = 3.29E7 * u.Lsun / (u.Msun/u.year)
@@ -25,7 +27,9 @@ def line_intensity(z, line):
         L0 = 0.35 * 3.29E7 * u.Lsun / (u.Msun/u.year)
     elif line == 'Lyalpha':
         wave = 121.567 * u.nm
-        L0 = 2.859E8 * u.Lsun / (u.Msun/u.year)       
+        L0 = 2.859E8 * u.Lsun / (u.Msun/u.year)
+    else:
+        raise Exception('cant recognize line: '+str(line))   
 
     def psi(zp):
         ans = 0.015
