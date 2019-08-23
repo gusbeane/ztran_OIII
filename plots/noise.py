@@ -115,7 +115,7 @@ def varp21x(P21, N21, Px, Nx):
     Pxtot = Px + Nx
     return xps**2 + P21tot*Pxtot
 
-def varp21x_wrapper(z, deltaz, kmin, kmax, zlist, klist, xps, pdelta, p21, b=4, sigma=4E4, wave_emit_x=0.65628):
+def varp21x_wrapper(line, z, deltaz, kmin, kmax, zlist, klist, xps, pdelta, p21, b=4, sigma=4E4, wave_emit_x=0.65628):
     fn_xps, fn_pdelta, fn_p21 = construct_interpolators(zlist, klist, xps, pdelta, p21)
 
     kcen = (kmin+kmax)/2.0
@@ -123,7 +123,7 @@ def varp21x_wrapper(z, deltaz, kmin, kmax, zlist, klist, xps, pdelta, p21, b=4, 
 
     P21 = fn_p21(z, kcen)
 
-    Ix = Halpha_intensity(z)
+    Ix = line_intensity(line, z)
     Px = (b*Ix)**2 * fn_pdelta(z, kcen)
 
     wave_obs_x = wave_emit_x*(1.+z)
@@ -137,13 +137,13 @@ def varp21x_wrapper(z, deltaz, kmin, kmax, zlist, klist, xps, pdelta, p21, b=4, 
 
     return float(xps), float(np.sqrt(varxps/Nm))
 
-def sum_var_over_bins(z, deltaz, kmin, kmax, Nk, zlist, klist, xps, pdelta, p21, b=4, sigma=4E4, wave_emit_x=0.65628):
+def sum_var_over_bins(line, z, deltaz, kmin, kmax, Nk, zlist, klist, xps, pdelta, p21, b=4, sigma=4E4, wave_emit_x=0.65628):
     kbins = np.linspace(kmin, kmax, Nk)
     totsnr = 0.0
     for i in range(len(kbins)-1):
         this_kmin = kbins[i]
         this_kmax = kbins[i+1]
-        this_xps, this_stdxps = varp21x_wrapper(z, deltaz, this_kmin, this_kmax, zlist, klist, xps, pdelta, p21,
+        this_xps, this_stdxps = varp21x_wrapper(line, z, deltaz, this_kmin, this_kmax, zlist, klist, xps, pdelta, p21,
                                                 b=b, sigma=sigma, wave_emit_x=wave_emit_x)
 
         totsnr += np.square(this_xps/this_stdxps)
