@@ -93,3 +93,8 @@ def calc_Nmodes(kmin, kmax, z, deltaz, Asurv=31.1):
 
     return Vkspace / Vfund
 
+def compute_Nx(wave_obs, wave_emit, sigma):
+    vpix = calc_vpix(wave_obs, wave_emit)
+    ans = sigma**2 * vpix
+    return ans
+
