@@ -98,3 +98,6 @@ def compute_Nx(wave_obs, wave_emit, sigma):
     ans = sigma**2 * vpix
     return ans
 
+def _var_auto_singlemode(P, N):
+    Ptot = P + N
+    return np.square(Ptot)
