@@ -39,7 +39,7 @@ fn_xps = interp2d(zlist, klist, np.transpose(xps))
 
 zlist = np.arange(zmin, zmax, 0.4)
 truth = fn_xps(zlist, 0.1)
-data = np.random.normal(loc=truth, scale=5*np.abs(truth[-1]))
+data = np.random.normal(loc=truth, scale=4*np.abs(truth[-1]))
 
 sigma = 5 * np.abs(truth[-1])
 sigma = np.full(len(truth), sigma)
