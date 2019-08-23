@@ -68,19 +68,19 @@ def compute_Nx(wave_obs, sigma=4E4, wave_emit=0.65628):
     ans = sigma**2 * vpix
     return ans
 
-def Nmodes(k, deltak, z, deltaz, Asurv=31.1):
+def Nmodes(kmin, kmax, z, deltaz, Asurv=31.1):
     z_upper = z + deltaz/2.0
     z_lower = z - deltaz/2.0
     dlos = cosmo.comovingDistance(z_lower, z_upper)/cosmo.h
-    print(z, deltaz, z_lower, z_upper, dlos)
 
     # convert A surv to on sky width
     Lindeg = np.sqrt(Asurv)
     Lperp = cosmo.angularDiameterDistance(z)/cosmo.h * Lindeg * (np.pi/180.)
 
     Vfund = (2.*np.pi)**3 / (Lperp**2 * dlos)
+    Vkspace = (4*np.pi/3.) * (kmax**3 - kmin**3)
 
-    return 4.*np.pi*k**2 * deltak / Vfund
+    return Vkspace / Vfund
 
 def calc_vpix(wave_obs, pix_length_in_arcsecond=1, R=300, wave_emit=0.65628):
     # compute the upper and lower redshift from the spectrograph resolution
@@ -132,7 +132,7 @@ def varp21x_wrapper(z, deltaz, kmin, kmax, zlist, klist, xps, pdelta, p21, b=4, 
     Nx = compute_Nx(wave_obs_x, sigma=sigma)
 
     varxps = varp21x(P21, N21, Px, Nx)
-    Nm = Nmodes(kcen, deltak, z, deltaz)
+    Nm = Nmodes(kmin, kmax, z, deltaz)
     xps = np.sqrt(P21*Px)
 
     return float(xps), float(np.sqrt(varxps/Nm))
