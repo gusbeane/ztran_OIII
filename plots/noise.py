@@ -44,3 +44,17 @@ def line_intensity(z, line, surface_brightness=True):
 
     return ans
 
+def intensity_power_spectrum(z, k, I=None, line=None, b=4, dimensionless=True, surface_brightness=True):
+    Pden = cosmo.matterPowerSpectrum(k.to_value(1/u.Mpc)/cosmo.h, z)/(cosmo.h**3)
+    Pden *= u.Mpc**3
+
+    if I is None:
+        assert line is not None, "If I is not specified you must specify the line"
+        I = line_intensity(z, line, surface_brightness=surface_brightness)
+
+    ans = (b*I)**2 * Pden
+
+    if dimensionless:
+        ans *= k**3 / (2.*np.pi**2)
+
+    return ans
