@@ -137,6 +137,18 @@ def varp21x_wrapper(z, deltaz, kmin, kmax, zlist, klist, xps, pdelta, p21, b=4, 
 
     return float(xps), float(np.sqrt(varxps/Nm))
 
+def sum_var_over_bins(z, deltaz, kmin, kmax, Nk, zlist, klist, xps, pdelta, p21, b=4, sigma=4E4, wave_emit_x=0.65628):
+    kbins = np.linspace(kmin, kmax, Nk)
+    totsnr = 0.0
+    for i in range(len(kbins)-1):
+        this_kmin = kbins[i]
+        this_kmax = kbins[i+1]
+        this_xps, this_stdxps = varp21x_wrapper(z, deltaz, this_kmin, this_kmax, zlist, klist, xps, pdelta, p21,
+                                                b=b, sigma=sigma, wave_emit_x=wave_emit_x)
+
+        totsnr += np.square(this_xps/this_stdxps)
+    return np.sqrt(totsnr)
+
 
 if __name__ == '__main__':
     directory = '/Users/abeane/scratch/ztran_OIII_sims/v1.2/256Mpch/256/fid/MyOutput'
