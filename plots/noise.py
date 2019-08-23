@@ -16,6 +16,31 @@ cosmo = cosmology.setCosmology('myCosmo', params)
 
 h = 0.6766
 
+def line_intensity(z, line):
+    if line == 'Halpha':
+        wave = 656.45377 * u.nm
+        L0 = 3.29E7 * u.Lsun / (u.Msun/u.year)
+    elif line == 'Hbeta':
+        wave = 486.13615 * u.nm
+        L0 = 0.35 * 3.29E7 * u.Lsun / (u.Msun/u.year)
+    elif line == 'Lyalpha':
+        wave = 121.567 * u.nm
+        L0 = 2.859E8 * u.Lsun / (u.Msun/u.year)       
+
+    def psi(zp):
+        ans = 0.015
+        ans *= (1+zp)**(2.7)
+        ans /= 1 + ((1+zp)/2.9)**(5.6)
+        return ans
+
+    psi_at_z = psi(z) * u.Msun/u.year/(u.Mpc**3)
+    Hz = cosmo.Hz(z) * u.km/u.s/u.Mpc
+    nurest = c/wave
+
+    ans = (L0*psi_at_z / (4.*np.pi*nurest)) * (c/Hz)
+    ans = ans.to_value(u.Jy)
+    return ans
+
 def Halpha_intensity(z, Hbeta=False):
     if Hbeta:
         wave = 486.13615 * u.nm
