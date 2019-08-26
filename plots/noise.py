@@ -66,18 +66,19 @@ def calc_vpix(wave_obs, wave_emit, pix_length_in_arcsecond=1, R=300):
     wave_lower = wave_obs - dlambda/2.0
 
     z_upper = ((wave_upper-wave_emit)/wave_emit).to_value(u.dimensionless_unscaled)
-    z_lower = (wave_lower-wave_emit)/wave_emit.to_value(u.dimenisonless_unscaled)
+    z_lower = ((wave_lower-wave_emit)/wave_emit).to_value(u.dimensionless_unscaled)
+    z = (wave_obs/wave_emit).to_value(u.dimensionless_unscaled) - 1
 
-    d_upper = cosmo.comovingDistance(z_max=z_upper)/cosmo.h
-    d_lower = cosmo.comovingDistance(z_max=z_lower)/cosmo.h
-    volume = (4.*np.pi/3.) * (d_upper**3 - d_lower**3)
+    d_upper = cosmo.comovingDistance(z_max=z_upper)/cosmo.h * u.Mpc
+    d_lower = cosmo.comovingDistance(z_max=z_lower)/cosmo.h * u.Mpc
+    dpar = d_upper - d_lower
+    print(dpar, cosmo.comovingDistance(z_lower, z_upper)/cosmo.h * u.Mpc)
 
-    Apix = (pix_length_in_arcsecond * u.arcsecond)**2
-    Apix = Apix.to_value(u.deg**2)
-    tot_sky_in_degree = (4.*np.pi * u.steradian).to_value(u.deg**2)
-    Apix_fraction = Apix / tot_sky_in_degree
+    xpix = (pix_length_in_arcsecond * u.arcsecond).to_value(u.radian)
+    dperp = xpix * cosmo.comovingDistance(0, z)/cosmo.h * u.Mpc
+    print(dperp)
 
-    return Apix_fraction * volume * u.Mpc**3
+    return dpar * dperp**2
 
 def calc_Nmodes(kmin, kmax, z, deltaz, Asurv=31.1):
     z_upper = z + deltaz/2.0
