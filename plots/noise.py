@@ -97,9 +97,11 @@ def calc_Nmodes(kmin, kmax, z, deltaz, Asurv=31.1):
 
     return Vkspace / Vfund
 
-def compute_Nx(wave_obs, wave_emit, sigma):
+def compute_Nx(wave_obs, wave_emit, sigma, surface_brightness=True):
     vpix = calc_vpix(wave_obs, wave_emit)
     ans = sigma**2 * vpix
+    if surface_brightness:
+        ans *= (c/wave_obs)**2
     return ans
 
 def _var_auto_singlemode(P, N):
