@@ -85,8 +85,8 @@ def calc_Nmodes(kmin, kmax, z, deltaz, Asurv=31.1):
     z_lower = z - deltaz/2.0
     dlos = cosmo.comovingDistance(z_lower, z_upper)/cosmo.h
 
-    kmin = kmin.to(1/u.Mpc)
-    kmax = kmax.to(1/u.Mpc)
+    kmin = kmin.to_value(1/u.Mpc)
+    kmax = kmax.to_value(1/u.Mpc)
 
     # convert A surv to on sky width
     Lindeg = np.sqrt(Asurv)
