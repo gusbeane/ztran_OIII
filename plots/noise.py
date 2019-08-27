@@ -22,6 +22,24 @@ def psi(zp):
     ans /= 1 + ((1+zp)/2.9)**(5.6)
     return ans * u.Msun/(u.year * u.Mpc**3)
 
+def sigmaN(lam, IZL, tobs, epsilon, R=300, D=84*u.cm, Omegapix=(1*u.arcsecond)**2):
+    sigmaN0 = 1.37 * u.nW/u.m**2/u.sr
+    fac = (1 * u.micron)/lam
+    fac *= R/100
+    fac *= IZL/(1E3*u.nW/u.m**2/u.sr)
+    fac *= 0.126 * u.m**2/(np.pi*D**2)
+    fac *= 8.5E-10 * u.sr / (Omegapix)
+    fac *= 1E5 * u.s / (tobs)
+    fac *= 1./np.sqrt(epsilon)
+    fac = np.sqrt(fac).to_value(u.dimensionless_unscaled)
+
+    sigmaN0 *= fac
+    obs_freq = c/lam
+    sigmaN0 /= obs_freq
+
+    return sigmaN0.to(u.erg/u.s/u.cm**2/u.Hz/u.sr)
+    
+
 def line_intensity(z, line, surface_brightness=True):
     assert isinstance(line, str), "line must be a string!"
     assert line in line_wavelength.keys(), "line: "+line+" not recognized!"
