@@ -143,13 +143,12 @@ def var_auto(line, z, deltaz, kmin, kmax, sigma, Asurv, b=4, return_signal=True,
         P *= (kcen**3)/(2.*np.pi**2)
         N *= (kcen**3)/(2.*np.pi**2)
 
-    print(P, N)
     var_singlemode = _var_auto_singlemode(P, N)
     var = var_singlemode/Nmodes
-    print(var)
 
     if return_signal:
         # return var.to((u.erg/u.s/u.cm**2/u.sr)**4), P.to((u.erg/u.s/u.cm**2/u.sr)**2)
         return var, P
     else:
         return var.to((u.erg/u.s/u.cm**2/u.sr)**4)
+
