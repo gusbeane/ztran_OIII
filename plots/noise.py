@@ -234,3 +234,12 @@ def sum_var_auto_over_bins(line, z, deltaz, kmin, kmax, Nk, sigma, Asurv,
         totsnr += np.square(this_xps/np.sqrt(this_var))
     return np.sqrt(totsnr)
 
+if __name__ == '__main__':
+    directory = '/Users/abeane/scratch/ztran_OIII_sims/v1.2/256Mpch/256/fid/MyOutput'
+    zlist, klist, xps, pdelta, p21 = read_xps(directory+'/xps*', return_auto=True)
+
+    var, P = var_cross('Lyalpha', 7, 1, 0.075/u.Mpc, 0.125/u.Mpc, 1.5E-19*u.erg/u.s/u.cm**2/u.Hz/u.sr,
+                       31.1, zlist, klist, xps, pdelta, p21)
+
+    totsnr = sum_var_cross_over_bins('Lyalpha', 7, 1, 0.05/u.Mpc, 1.0/u.Mpc, 10, 1.5E-19*u.erg/u.s/u.cm**2/u.Hz/u.sr,
+                                     31.1, zlist, klist, xps, pdelta, p21)
