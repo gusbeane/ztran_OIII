@@ -203,3 +203,34 @@ def var_cross(line, z, deltaz, kmin, kmax, sigma, Asurv,
         return var.to((u.erg/u.s/u.cm**2/u.sr)**4)
 
 
+def sum_var_cross_over_bins(line, z, deltaz, kmin, kmax, Nk, sigma, Asurv, zlist, klist, xps, pdelta, p21,
+                            b=4, k21=1.0):
+    kbins = np.linspace(kmin.to_value(1/u.Mpc), kmax.to_value(1/u.Mpc), Nk)
+    totsnr = 0.0
+    for i in range(len(kbins)-1):
+        this_kmin = kbins[i]
+        this_kmax = kbins[i+1]
+        this_var, this_xps = var_cross(line, z, deltaz, this_kmin/u.Mpc, this_kmax/u.Mpc, sigma, Asurv,
+                                          zlist, klist, xps, pdelta, p21,
+                                          b=b, k21=k21)
+
+        # totsnr += np.square(this_xps/np.sqrt(this_var)).to_value(u.dimensionless_unscaled)
+        totsnr += np.square(this_xps/np.sqrt(this_var))
+    return np.sqrt(totsnr)
+
+def sum_var_auto_over_bins(line, z, deltaz, kmin, kmax, Nk, sigma, Asurv,
+                            b=4, Iline=None):
+    kbins = np.linspace(kmin.to_value(1/u.Mpc), kmax.to_value(1/u.Mpc), Nk)
+    totsnr = 0.0
+    for i in range(len(kbins)-1):
+        this_kmin = kbins[i]
+        this_kmax = kbins[i+1]
+        this_var, this_xps = var_auto(line, z, deltaz, this_kmin/u.Mpc, this_kmax/u.Mpc, sigma, Asurv,
+                                          b=b, Iline=Iline)
+
+        print(this_xps/np.sqrt(this_var))
+
+        # totsnr += np.square(this_xps/np.sqrt(this_var)).to_value(u.dimensionless_unscaled)
+        totsnr += np.square(this_xps/np.sqrt(this_var))
+    return np.sqrt(totsnr)
+
