@@ -167,3 +167,39 @@ def construct_interpolators(zlist, klist, xps, pdelta, p21):
 
     return fn_xps, fn_pdelta, fn_p21
 
+def var_cross(line, z, deltaz, kmin, kmax, sigma, Asurv,
+              zlist, klist, xps, pdelta, p21,
+              b=4, return_signal=True, k21=1.,
+              surface_brightness=True, dimensionless=False, Iline=None):
+    Nmodes = calc_Nmodes(kmin, kmax, z, deltaz, Asurv)
+
+    fn_xps, fn_pdelta, fn_p21 = construct_interpolators(zlist, klist, xps, pdelta, p21)
+
+    kcen = (kmin + kmax)/2.0
+
+    wave_emit = line_wavelength[line]
+    wave_obs = wave_emit * (1. + z)
+    freq_obs = c/wave_obs
+
+    P = intensity_power_spectrum(z, kcen, I=Iline, line=line, b=b, dimensionless=False, 
+                                 surface_brightness=surface_brightness)
+    P21 = fn_p21(z, kcen) * u.mK**2 * u.Mpc**3
+    N21 = fn_p21(z, k21) * u.mK**2 * u.Mpc**3
+
+    N = compute_Nx(wave_obs, wave_emit, sigma, surface_brightness=surface_brightness)
+    if dimensionless:
+        P *= (kcen**3)/(2.*np.pi**2)
+        N *= (kcen**3)/(2.*np.pi**2)
+        P21 *= (kcen**3)/(2.*np.pi**2)
+        N21 *= (kcen**3)/(2.*np.pi**2)
+
+    var_singlemode = _var_cross_singlemode(P, N, P21, N21)
+    var = var_singlemode/Nmodes
+
+    if return_signal:
+        # return var.to((u.erg/u.s/u.cm**2/u.sr)**4), P.to((u.erg/u.s/u.cm**2/u.sr)**2)
+        return var, np.sqrt(P*P21)
+    else:
+        return var.to((u.erg/u.s/u.cm**2/u.sr)**4)
+
+
