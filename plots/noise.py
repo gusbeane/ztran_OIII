@@ -1,9 +1,11 @@
 import numpy as np
+from scipy.interpolate import interp2d
 
 import astropy.units as u
 from astropy.constants import c
 
 from colossus.cosmology import cosmology
+from helper import read_xps
 
 params = {'flat': True, 'H0': 67.66, 'Om0': 0.3111, 'Ob0': 0.02242/(0.6766**2), 'sigma8': 0.8102, 'ns': 0.9665}
 cosmo = cosmology.setCosmology('myCosmo', params)
@@ -30,7 +32,7 @@ def sigmaN(lam, IZL, tobs, epsilon, R=300, D=84*u.cm, Omegapix=(1*u.arcsecond)**
     fac *= 0.126 * u.m**2/(np.pi*D**2)
     fac *= 8.5E-10 * u.sr / (Omegapix)
     fac *= 1E5 * u.s / (tobs)
-    fac *= 1./np.sqrt(epsilon)
+    fac *= 1./epsilon
     fac = np.sqrt(fac).to_value(u.dimensionless_unscaled)
 
     sigmaN0 *= fac
@@ -90,11 +92,9 @@ def calc_vpix(wave_obs, wave_emit, pix_length_in_arcsecond=1, R=300):
     d_upper = cosmo.comovingDistance(z_max=z_upper)/cosmo.h * u.Mpc
     d_lower = cosmo.comovingDistance(z_max=z_lower)/cosmo.h * u.Mpc
     dpar = d_upper - d_lower
-    print(dpar, cosmo.comovingDistance(z_lower, z_upper)/cosmo.h * u.Mpc)
 
     xpix = (pix_length_in_arcsecond * u.arcsecond).to_value(u.radian)
     dperp = xpix * cosmo.comovingDistance(0, z)/cosmo.h * u.Mpc
-    print(dperp)
 
     return dpar * dperp**2
 
@@ -106,14 +106,17 @@ def calc_Nmodes(kmin, kmax, z, deltaz, Asurv=31.1):
     kmin = kmin.to_value(1/u.Mpc)
     kmax = kmax.to_value(1/u.Mpc)
 
+    kcen = (kmin+kmax)/2.0
+    dlnk = (kmax-kmin)/kcen
+
     # convert A surv to on sky width
     Lindeg = np.sqrt(Asurv)
-    Lperp = cosmo.angularDiameterDistance(z)/cosmo.h * Lindeg * (np.pi/180.)
+    Lperp = cosmo.comovingDistance(0, z)/cosmo.h * Lindeg * (np.pi/180.)
 
     Vfund = (2.*np.pi)**3 / (Lperp**2 * dlos)
     Vkspace = (4*np.pi/3.) * (kmax**3 - kmin**3)
 
-    return Vkspace / Vfund
+    return Vkspace / Vfund / 2. # only count modes in upper half plane
 
 def compute_Nx(wave_obs, wave_emit, sigma, surface_brightness=True):
     vpix = calc_vpix(wave_obs, wave_emit)
@@ -126,8 +129,13 @@ def _var_auto_singlemode(P, N):
     Ptot = P + N
     return np.square(Ptot)
 
+def _var_cross_singlemode(P1, N1, P2, N2):
+    Ptot1 = P1 + N1
+    Ptot2 = P2 + N2
+    return P1*P2 + Ptot1*Ptot2
+
 def var_auto(line, z, deltaz, kmin, kmax, sigma, Asurv, b=4, return_signal=True, 
-             surface_brightness=True, dimensionless=False):
+             surface_brightness=True, dimensionless=False, Iline=None):
     Nmodes = calc_Nmodes(kmin, kmax, z, deltaz, Asurv)
 
     kcen = (kmin + kmax)/2.0
@@ -136,7 +144,7 @@ def var_auto(line, z, deltaz, kmin, kmax, sigma, Asurv, b=4, return_signal=True,
     wave_obs = wave_emit * (1. + z)
     freq_obs = c/wave_obs
 
-    P = intensity_power_spectrum(z, kcen, line=line, b=b, dimensionless=False, 
+    P = intensity_power_spectrum(z, kcen, I=Iline, line=line, b=b, dimensionless=False, 
                                  surface_brightness=surface_brightness)
     N = compute_Nx(wave_obs, wave_emit, sigma, surface_brightness=surface_brightness)
     if dimensionless:
