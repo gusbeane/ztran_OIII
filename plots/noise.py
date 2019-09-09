@@ -160,3 +160,10 @@ def var_auto(line, z, deltaz, kmin, kmax, sigma, Asurv, b=4, return_signal=True,
     else:
         return var.to((u.erg/u.s/u.cm**2/u.sr)**4)
 
+def construct_interpolators(zlist, klist, xps, pdelta, p21):
+    fn_xps = interp2d(zlist, klist, np.transpose(xps))
+    fn_pdelta = interp2d(zlist, klist, np.transpose(pdelta))
+    fn_p21 = interp2d(zlist, klist, np.transpose(p21))
+
+    return fn_xps, fn_pdelta, fn_p21
+
