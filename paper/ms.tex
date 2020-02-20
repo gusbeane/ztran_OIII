@@ -77,7 +77,7 @@
 \newcommand{\hot}{\texttt{hot}}
 \newcommand{\cold}{\texttt{cold}}
 
-\newcommand{\zst}{\ensuremath{z_{\star}}}
+\newcommand{\zv}{\ensuremath{z_{v}}}
 \newcommand{\E}[1]{\mathrm{E}[#1]}
 \newcommand{\Var}[1]{\mathrm{Var}[#1]}
 \newcommand{\Cov}[2]{\mathrm{Cov}[#1,#2]}
@@ -92,20 +92,20 @@
 
 % Title of the paper, and the short title which is used in the headers.
 % Keep the title short and informative.
-\title[The transition redshift as an EoR probe]{The transition redshift as a probe of reionization}
+\title[The vanishing redshift as an EoR probe]{The vanishing redshift as a probe of reionization}
 
 % The list of authors, and the short list which is used in the headers.
 % If you need two or more lines of authors, add an extra line using \newauthor
-\author[A. Beane et al.]{
-Angus Beane,$^{1}$\thanks{E-mail: angus.beane@cfa.harvard.edu}
-Adam Lidz,$^{2}$
-Kana Moriwaki,$^{3}$
+\author[K. Moriwaki et al.]{
+Kana Moriwaki,$^{1}$\thanks{E-mail: kana.moriwaki@utap.phys.s.u-tokyo.ac.jp}
+Angus Beane,$^{2}$\thanks{E-mail: angus.beane@cfa.harvard.edu}
+Adam Lidz,$^{3}$
 and others
 \\
 % List of institutions
-$^{1}$Center for Astrophysics {\normalfont |} Harvard \& Smithsonian, 60 Garden Street, Cambridge, MA 02138, USA\\
-$^{2}$Department of Physics \& Astronomy, University of Pennsylvania, 209 South 33rd Street, Philadelphia, PA 19104, USA\\
-$^{3}$Department of Physics, The University of Tokyo, 7-3-1 Hongo, Bunkyo, Tokyo 113-0033, Japan
+$^{1}$Department of Physics, The University of Tokyo, 7-3-1 Hongo, Bunkyo, Tokyo 113-0033, Japan\\
+$^{2}$Center for Astrophysics {\normalfont |} Harvard \& Smithsonian, 60 Garden Street, Cambridge, MA 02138, USA\\
+$^{3}$Department of Physics \& Astronomy, University of Pennsylvania, 209 South 33rd Street, Philadelphia, PA 19104, USA\\
 % $^{2}$Center for Computational Astrophysics, Flatiron Institute, 162 5th Avenue, New York, NY 10010, USA\\
 }
 
@@ -127,20 +127,20 @@ The early stages of the Epoch of Reionization (EoR), probed by the 21~cm line,
 are sensitive to the detailed formation of the first galaxies. An important
 transition occurs on large scales at $z\sim10$, when the 21~cm field changes
 from being positively correlated with the density field to being negatively
-correlated. The redshift at which this occurs (the ``transition redshift'') is
+correlated. The redshift at which this occurs (the ``vanishing redshift'') is
 in principle measurable if the 21~cm field can be cross-correlated with a
 tracer of the density field (such as galaxies or a line intensity map) at that
-high redshift. Since the transition redshift is derived from a
+high redshift. Since the vanishing redshift is derived from a
 cross-correlation, it naively depends on the structure of the 21~cm field and
 the tracer field. However, we show that on large scales the transition
 redshift is independent of the structure of the tracer field. We verify this
 in simulations by assuming a simple model for a mock Ly$\alpha$ intensity
 mapping survey. By considering a joint measurement between the Square
 Kilometre Array and the Cosmic Dawn Intensity Mapper, we show that the
-transition redshift is measurable up until about $z\sim x$. Being derived from
-a cross-correlation, the transition redshift is less impacted by foreground
+vanishing redshift is measurable up until about $z\sim x$. Being derived from
+a cross-correlation, the vanishing redshift is less impacted by foreground
 contamination currently inhibiting 21~cm auto-spectrum measurements.
-Therefore, the transition redshift is an interesting probe of the early stages
+Therefore, the vanishing redshift is an interesting probe of the early stages
 of the EoR, and its detectability and interpretability deserve further study.
 \end{abstract}
 
@@ -166,6 +166,8 @@ the EoR, issues of foreground contamination and instrumental artifacts have so
 far prevented the success of such efforts. Only upper limits have been placed
 on the amplitude of the 21~cm fluctuations \citep[e.g.][]{2013MNRAS.433..639P,
 2014PhRvD..89b3002D, 2016ApJ...833..102B, 2017ApJ...838...65P}.
+
+Because of the difficulties in making 21~cm auto-spectrum measurements, the prospect of measuring 21~cm in cross-correlation with 
 
 Because of the great difficulties confronting 21~cm auto-spectrum
 measurements, the prospect of measuring 21~cm in cross-correlation with
@@ -208,7 +210,7 @@ and Ly$\alpha$ lines \citep{2013ApJ...763..132S}. The possibility of using the
 cross-bispectrum the 21~cm and [\CII] fields has been explored
 \citep{2018ApJ...867...26B}, along with combining the three cross-spectra with
 a 21~cm, [\CII], and [\OIII] overlap \citep{2019ApJ...874..133B}. Because the
-transition redshift is typically $\zst \sim 10$, it is unclear how much
+vanishing redshift is typically $\zv \sim 10$, it is unclear how much
 metal enrichment will have occurred by this early time. 
 
 In the case of either galaxies or emission lines, it is expected that the two
@@ -218,24 +220,24 @@ enhancement). This is because the densest regions host the most mass and
 therefore 21~cm emission and galaxy populations. However, the densest regions
 will also ionize first {\bf cite something}, and after some time 21~cm and
 galaxies will become negatively correlated. We refer to the redshift at which
-this transition occurs at a fixed $k$ as the ``transition redshift''
-$z_\star(k)$, assuming that only one such zero exists. In other words, the
-cross-correlation at $k$ vanishes at $z=z_{\star}(k)$.
+this transition occurs at a fixed $k$ as the ``vanishing redshift''
+$\zv(k)$, assuming that only one such zero exists. In other words, the
+cross-correlation at $k$ vanishes at $z=\zv(k)$.
 
-In this work we investigate to what extent the transition redshift is
+In this work we investigate to what extent the vanishing redshift is
 dependent upon the galaxy sample used to define it. We assume a galaxy catalog
 selected using an [\OIII] emitter survey. In particular, we are interested in
-how $z_\star$ changes as we vary the parameters of the [\OIII] luminosity-mass
+how \zv{} changes as we vary the parameters of the [\OIII] luminosity-mass
 relation for a fixed halo catalog.
 
 \section{Methods} \label{sec:methods}
-\subsection{The transition redshift} \label{ssec:ztran_def}
-The transition redshift $\zst(k)$ is defined by a field $x$ which traces the
+\subsection{The vanishing redshift} \label{ssec:ztran_def}
+The vanishing redshift $\zv(k)$ is defined by a field $x$ which traces the
 density field on large scales and the condition that
 \beq \label{eq:ztran_def}
-P_{21,x}(k, \zst(k)) \equiv 0\text{.}
+P_{21,x}(k, \zv(k)) \equiv 0\text{.}
 \eeq
-If more than one such \zst{} exists, then we choose the lowest one where
+If more than one such \zv{} exists, then we choose the lowest one where
 $P_{21,x}$ last transitioned from positive to negative.
 
 \subsection{21cmFAST} \label{ssec:tfast}
@@ -310,7 +312,7 @@ reality.
 complicated luminosity-halo relations.}
 
 \section{Results} \label{sec:results}
-\subsection{The transition redshift} \label{ssec:ztran_results}
+\subsection{The vanishing redshift} \label{ssec:ztran_results}
 
 \begin{figure*}
 \includegraphics[width=\textwidth]{plots/aveTb_nf.pdf}
@@ -320,9 +322,9 @@ each model, showing that reionization begins ($\avg{x_{\HII}}\sim0.01$) at
 $z\sim16$ and ends at $z\sim6$ in each model. In detail the ionization
 histories are slightly different, but not drastically. \textit{Lower}: the
 heating history of each model, showing the strong differences in the monopole
-signal. The transition redshift \zst{} (defined where $P_{21,\delta}(\zst{}) =
+signal. The vanishing redshift \zv{} (defined where $P_{21,\delta}(\zv{}) =
 0$) for each model is shown as a vertically dashed line. We see that models in
-which heating is more efficient have an earlier \zst{}.}
+which heating is more efficient have an earlier \zv{}.}
 \label{fig:aveTb_nf}
 \end{figure*}
 
@@ -330,23 +332,23 @@ which heating is more efficient have an earlier \zst{}.}
 {\bf If we switch to LIM I think this section should be scrapped, except
 showing ztran vs k but using LIM and density instead of halos}
 
-We first investigate the dependence of the transition redshift as defined by
-the halo field. Fig.~\ref{fig:ztran_vs_k} shows the transition redshift
+We first investigate the dependence of the vanishing redshift as defined by
+the halo field. Fig.~\ref{fig:ztran_vs_k} shows the vanishing redshift
 defined by the 21~cm\,--\,density cross-power spectrum (see
 Eq.~\ref{eq:ztran_def}) as a function of $k$. The three models considered in
 this work are shown in orange, gray, and teal (\hot{}, \fid{}, and \cold{},
 respectively).
 
-Fig.~\ref{fig:ztran_vs_k} shows that \zst{} is only weakly a function of $k$. 
+Fig.~\ref{fig:ztran_vs_k} shows that \zv{} is only weakly a function of $k$. 
 
 \begin{figure}
 \includegraphics[width=\columnwidth]{plots/ztran_vs_k.pdf}
-\caption{The transition redshift ($\zst$) as defined by cross-correlating with the
+\caption{The vanishing redshift ($\zv$) as defined by cross-correlating with the
 density field (solid lines) and all resolved halos (dashed lines, $M\gtrsim
 5\times10^9\,\Msun$), for our three different EoR models (\hot{}, \fid{}, and
-\cold{}). We see that \zst{} is only a mild function of $k$ for the three
+\cold{}). We see that \zv{} is only a mild function of $k$ for the three
 models, with slightly stronger dependence as the heating of the model
-decreases. The most dependence comes in the \cold{} model, where \zst{}
+decreases. The most dependence comes in the \cold{} model, where \zv{}
 changes by $\sim7\,\%$ from $k=0.1$ to $0.6\,\hoverMpc$. {\bf Some words for
 why cold and fid cut off at some k}}
 \label{fig:ztran_vs_k}
@@ -354,27 +356,27 @@ why cold and fid cut off at some k}}
 
 \begin{figure}
 \includegraphics[width=\columnwidth]{plots/ztran_vs_Mcut.pdf}
-\caption{The transition redshift (\zst) as defined by cross-correlating with
+\caption{The vanishing redshift (\zv) as defined by cross-correlating with
 the halo field for our three different EoR models (\hot{}, \fid{}, and
 \cold{}) as a function of the cut-off mass. The cross-correlation is only made
 between the 21~cm field and all halos with masses $M>M_{\text{cut}}$. One can
-see that for the \fid{} and \cold{} models, \zst{} is only mildly a function
+see that for the \fid{} and \cold{} models, \zv{} is only mildly a function
 of $M_{\text{cut}}$ below a certain cut-off mass ($\sim10^{10.5}\,\Msun$ in
 both models). In other words, as long as a galaxy survey is deep enough so as
-to resolve a sufficient number of galaxies, the \zst{} is not dependent on the
+to resolve a sufficient number of galaxies, the \zv{} is not dependent on the
 depth of the survey. The \hot{} model shows more dependence, but this may be
 due to sampling noise due to the smaller number of such halos at the higher
-\zst{} typical for the \hot{} model.}
+\zv{} typical for the \hot{} model.}
 \end{figure}
 
 \subsection{Line-intensity mapping} \label{ssec:lim}
-We now turn to understanding how \zst{} depends on the parameters of our
+We now turn to understanding how \zv{} depends on the parameters of our
 generic line-intensity mapping field: the slope ($\alpha$) and lognormal
 scatter ($\sigma$). See \S~\ref{ssec:oiii_int_map} for more details of the
 construction of the field.
 
-In Fig.~\ref{fig:ztran_vs_alpha_sigma} we plot \zst{} as a function of each of
-these parameters\,--\,$\alpha$ and $\sigma$. We see that \zst{} is remarkably
+In Fig.~\ref{fig:ztran_vs_alpha_sigma} we plot \zv{} as a function of each of
+these parameters\,--\,$\alpha$ and $\sigma$. We see that \zv{} is remarkably
 insensitive to the value of either of these parameters, with some small
 deviation as a function of $\alpha$. The \hot{}, \fid{}, and \cold{} models
 only vary by a total of $1.2\%$, $0.56\%$, $0.52\%$ with respect to $\alpha$,
@@ -382,20 +384,20 @@ and $0.070\%$, $0.10\%$, and $0.11\%$ with respect to $\sigma$, respectively.
 
 \begin{figure*}
 \includegraphics[width=\textwidth]{plots/ztran_vs_alpha_sigma.pdf}
-\caption{The transition redshift (\zst) defined by cross-correlating with a
+\caption{The vanishing redshift (\zv) defined by cross-correlating with a
 generic two-parameter intensity mapping field. The parameter $\alpha$ sets the
 slope of the luminosity-mass relation and the parameter $\sigma$ sets the
 lognormal scatter in this relation (see \S~\ref{ssec:oiii_int_map}). The
 \hot{}, \fid{}, and \cold{} models only vary by a total of $1.2\%$, $0.56\%$,
 $0.52\%$ with respect to $\alpha$, and $0.070\%$, $0.10\%$, and $0.11\%$ with
-respect to $\sigma$, respectively. Clearly \zst{} varies only with the
+respect to $\sigma$, respectively. Clearly \zv{} varies only with the
 structure of the 21~cm field, and is thus an excellent probe of reionization.}
 \label{fig:ztran_vs_alpha_sigma}
 \end{figure*}
 
 \section{Detectability}
 Up to this point, we have not been specific about which galactic emission line
-one might consider using to measure \zst{}\,--\,in fact, our entire formalism
+one might consider using to measure \zv{}\,--\,in fact, our entire formalism
 could be executed using a galaxy survey, if one with sufficient redshift
 accuracy and depth could be executed. While it will not be possible for a
 traditional galaxy survey to extend to $z\sim10$ in the near future, it may be
@@ -493,13 +495,13 @@ where $L_{\perp}$ is the  and $L_{\parallel}$ is the comoving length of the
 redshift extent of the bin. The optimal redshift binning is not entirely
 clear, since the observational target is not the power spectrum. We assume a
 redshift bin of $\Delta z = 0.03$, which is smaller than the expected error we
-compute on \zst{}, and so is not an unreasonable choice. We assume a $k$-bin
+compute on \zv{}, and so is not an unreasonable choice. We assume a $k$-bin
 of fairly large width, from $k=0.1$ to $0.4\,\Mpc^{-1}$.
 
-By expanding $P_{21,\Ha}$ as a linear function about \zst{}, we can estimate the
-error on \zst{} by
+By expanding $P_{21,\Ha}$ as a linear function about \zv{}, we can estimate the
+error on \zv{} by
 \beq \label{eq:error_on_zst}
-\Var{\zst} = \left(\left.\frac{\partial P_{21,\Ha}}{\partial z}\right|_{\zst}\right)^{-2} \Var{P_{21,\Ha}}\text{,}
+\Var{\zv} = \left(\left.\frac{\partial P_{21,\Ha}}{\partial z}\right|_{\zv}\right)^{-2} \Var{P_{21,\Ha}}\text{,}
 \eeq
 where ${\partial P_{21,\Ha}}/{\partial z}$ is computed numerically.
 
